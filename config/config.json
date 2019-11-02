@@ -1,6 +1,5 @@
 {
   "development": {
-    "username": "root",
     "username": "teamuser",
     "password": "vcb2019!",
     "database": "exampledb",
