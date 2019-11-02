@@ -1,6 +1,10 @@
 {
   "development": {
+<<<<<<< HEAD
     "username": "root",
+=======
+    "username": "teamuser",
+>>>>>>> f8c5f3c26a503014d7d90486c4a244d123b24336
     "password": "vcb2019!",
     "database": "exampledb",
     "host": "localhost",
