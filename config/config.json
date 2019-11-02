@@ -1,5 +1,6 @@
 {
   "development": {
+    "username": "root",
     "username": "teamuser",
     "password": "vcb2019!",
     "database": "exampledb",
@@ -7,9 +8,9 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "testdb",
+    "username": "teamuser",
+    "password": "vcb2019!",
+    "database": "exampledb",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
