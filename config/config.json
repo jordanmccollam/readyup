@@ -2,14 +2,14 @@
   "development": {
     "username": "teamuser",
     "password": "vcb2019!",
-    "database": "exampledb",
+    "database": "readyUp_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "testdb",
+    "username": "teamuser",
+    "password": "vcb2019!",
+    "database": "readyUp_db",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
