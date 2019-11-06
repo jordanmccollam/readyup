@@ -11,9 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     // Which console the user is currently wanting to play on
-    // They can leave blank if no preference
     console: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "no preference"
     },
     // Call of Duty rank
     cod_rank: {
