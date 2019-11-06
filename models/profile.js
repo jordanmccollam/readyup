@@ -6,6 +6,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     // Which console the user is currently wanting to play on
     // They can leave blank if no preference
     console: {
