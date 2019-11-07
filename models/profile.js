@@ -41,12 +41,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: "waiting"
     },
-    // If the user is logged in to our site or not
-    loggedin: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    }
   });
   return Profile;
 };
