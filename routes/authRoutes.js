@@ -1,61 +1,64 @@
 var db = require("../models");
 
-module.exports = function(app) {
+// Using BCRYPT so that users password is hashed in our database
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-    // New user
-    app.post("/newuser", function(req, res) {
-        db.Profile.create({
-            username: req.body.username,
-            password: req.body.password,
-            console: req.body.console,
-            loggedin: true
-        }).then(function(data) {
-            res.json(data);
+module.exports = function (app, passport) {
+
+  // Dummy page for testing features
+  app.get("/test", function (req, res) {
+    res.render("testAuth");
+  });
+
+  // Authentication Routes
+  // Returning User (Login)
+  app.post("/login", passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/test"
+  }));
+//   Above redirects are not working ***
+
+  app.get("/logout", function(req, res) {
+    req.logout();
+    req.session.destroy();
+    res.redirect("/");
+  })
+
+
+  // New user
+  app.post("/newuser", function (req, res) {
+    var password = req.body.password
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+      db.Profile.create({
+        username: req.body.username,
+        password: hash
+      }).then(function (data) {
+
+        const user_id = data.get("id");
+
+        console.log(user_id);
+        req.login(user_id, function (err) {
+          res.redirect("/");
         });
+      });
     });
+  });
 
-    app.post("/login", function(req, res) {
-        db.Profile.findOne({
-            where: {
-                username: req.body.username,
-                password: req.body.password
-            }
-        }).then(function(data) {
-            if (data) {
-                login(req, res);
-            } else {
-                res.json("error");
-            }
-        })
-    });
+  passport.serializeUser(function (user_id, done) {
+    done(null, user_id);
+  });
 
-    function login(req, res) {
-        db.Profile.update({
-            console: req.body.console,
-            loggedin: true,
-            room: "waiting"
-        },
-        {
-            where: {
-                username: req.body.username,
-                password: req.body.password
-            }
-        }).then(function(data) {
-            res.json(data);
-        })
+  passport.deserializeUser(function (user_id, done) {
+    done(null, user_id);
+  });
+
+  // Call this function right after the route ("/") to restrict access if not logged in...
+  function authenticationMiddleware() {
+    return (req, res, next) => {
+      console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+      if (req.isAuthenticated()) return next();
+      res.redirect("/")
     }
-
-    app.post("/logout", function(req, res) {
-        console.log(req.body);
-        db.Profile.update({
-            loggedin: false,
-            room: "waiting"
-        },
-        {
-            where: {
-                username: req.body.username,
-                loggedin: true
-            }
-        })
-    });
+  }
 };
