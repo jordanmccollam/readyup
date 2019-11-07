@@ -1,3 +1,23 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+body {
+  background: url(../images/readyUpBG.png) no-repeat 50% 50% fixed;
+  background-size: cover;
+}
+
+.navbar-brand {
+  /* margin-left: 40px; */
+}
+
+#logo {
+  /* height: 30px;
+  width: 30px; */
+  overflow:none;
+}
+
+.btn-secondary {
+background: green;
+/* margin-right: 75px; */
+}
