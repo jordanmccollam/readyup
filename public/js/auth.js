@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-
     // EDIT PROFILE
     $("#editProfile").on("click", function() {
         event.preventDefault();
         $("#editModal").modal("show");
     });
+
 
     // CONSOLE ICONS
     // If player is on ps4, display ps4 font-awesome icon
@@ -33,6 +33,14 @@ $(document).ready(function () {
     $(".rocketLeague-champ3").append("<img src='images/rocketLeagueIcons/rlChamp3.png' width='35'>");
     $(".rocketLeague-grand").append("<img src='images/rocketLeagueIcons/rlGrand.png' width='35'>");
 
+    // FORTNITE RANK ICONS
+    $(".fortnite-open1").append("<img src='images/fortniteIcons/open1.jpg' class='rounded' width='25'>");
+    $(".fortnite-open2").append("<img src='images/fortniteIcons/open2.jpg' class='rounded' width='25'>");
+    $(".fortnite-open3").append("<img src='images/fortniteIcons/open3.jpg' class='rounded' width='25'>");
+    $(".fortnite-contender1").append("<img src='images/fortniteIcons/contender1.jpg' class='rounded' width='25'>");
+    $(".fortnite-contender2").append("<img src='images/fortniteIcons/contender2.jpg' class='rounded' width='25'>");
+    $(".fortnite-contender3").append("<img src='images/fortniteIcons/contender3.jpg' class='rounded' width='25'>");
+    $(".fortnite-champ").append("<img src='images/fortniteIcons/champ.jpg' class='rounded' width='25'>");
 
     // END of jQuery
 })

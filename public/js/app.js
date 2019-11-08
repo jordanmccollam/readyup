@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // DRAG AND DROP **************************************************
     const player = document.querySelector(".player");
     const lanes = document.querySelectorAll(".lane");
 
@@ -49,6 +50,9 @@ $(document).ready(function () {
 
         this.append(player);
         $.post("/updateRoom", newRoom);
+        setTimeout(function() {
+            window.location.reload();
+        }, 500);
     }
 
 
@@ -60,4 +64,15 @@ $(document).ready(function () {
 
     }
 
+    // Change Sections **********************************************************
+    changeSection();
+    function changeSection() {
+        if ($(".player").hasClass("rocketLeague")) {
+            $("#rlSection").append($(".player"));
+        } else if ($(".player").hasClass("cod")) {
+            $("#codSection").append($(".player"));
+        } else if ($(".player").hasClass("fortnite")) {
+            $("#fortniteSection").append($(".player"));
+        }
+    }
 });
