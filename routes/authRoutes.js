@@ -66,6 +66,18 @@ module.exports = function (app, passport) {
     });
   });
 
+  // Update room
+  app.post("/updateRoom", function(req, res) {
+    db.Profile.update({
+      room: req.body.room
+    },
+    {
+      where: {
+        id: req.user.user_id
+      }
+    });
+  })
+
 
   // New user
   app.post("/newuser", function (req, res) {
