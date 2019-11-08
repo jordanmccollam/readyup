@@ -25,4 +25,5 @@ background: green;
 .player {
   font-size: 20px;
   font-family: 'Orbitron', sans-serif;
+  position: relative;
 }
