@@ -7,7 +7,7 @@ const saltRounds = 10;
 module.exports = function (app, passport) {
 
   // Dummy page for testing features
-  app.get("/test", function (req, res) {
+  app.get("/test", authenticationMiddleware(), function (req, res) {
     console.log(req.user.user_id);
     db.Profile.findOne({
       where: {
@@ -29,8 +29,8 @@ module.exports = function (app, passport) {
   // Authentication Routes
   // Returning User (Login)
   app.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/test"
+    successRedirect: "/test",
+    failureRedirect: "/"
   }));
   //   Above redirects are not working ***
 
