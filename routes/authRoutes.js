@@ -34,10 +34,19 @@ module.exports = function (app, passport) {
     failureRedirect: "/"
   }));
 
+  // Logout
   app.get("/logout", function (req, res) {
-    req.logout();
-    req.session.destroy();
-    res.redirect("/");
+    db.Profile.update({
+      room: "waiting"
+    }, {
+      where: {
+        id: req.user.user_id
+      }
+    }).then(function (data) {
+      req.logout();
+      req.session.destroy();
+      res.redirect("/");
+    })
   });
 
   app.post("/editProfile", function (req, res) {
@@ -68,11 +77,10 @@ module.exports = function (app, passport) {
   });
 
   // Update room
-  app.post("/updateRoom", function(req, res) {
+  app.post("/updateRoom", function (req, res) {
     db.Profile.update({
       room: req.body.room
-    },
-    {
+    }, {
       where: {
         id: req.user.user_id
       }
