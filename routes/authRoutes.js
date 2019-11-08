@@ -8,31 +8,31 @@ module.exports = function (app, passport) {
 
   // Dummy page for testing features
   app.get("/test", authenticationMiddleware(), function (req, res) {
-    console.log(req.user.user_id);
+    var currentUser;
+    var rlUsers;
+    var fortniteUsers;
     db.Profile.findOne({
       where: {
         id: req.user.user_id
       }
-    }).then(function (data) {
+    }).then(function (currentUserData) {
       currentUser = {
-        username: data.username,
-        console: data.console,
-        cod_rank: data.cod_rank,
-        rl_rank: data.rl_rank,
-        fortnite_rank: data.fortnite_rank,
-        room: data.room
+        username: currentUserData.username,
+        console: currentUserData.console,
+        cod_rank: currentUserData.cod_rank,
+        rl_rank: currentUserData.rl_rank,
+        fortnite_rank: currentUserData.fortnite_rank,
+        room: currentUserData.room
       }
       res.render("testAuth", currentUser);
     });
   });
 
-  // Authentication Routes
   // Returning User (Login)
   app.post("/login", passport.authenticate("local", {
     successRedirect: "/test",
     failureRedirect: "/"
   }));
-  //   Above redirects are not working ***
 
   app.get("/logout", function (req, res) {
     req.logout();
@@ -55,7 +55,8 @@ module.exports = function (app, passport) {
       db.Profile.update({
         username: usernameValue,
         console: req.body.console,
-        rl_rank: req.body.rl_rank
+        rl_rank: req.body.rl_rank,
+        fortnite_rank: req.body.fortnite_rank
       }, {
         where: {
           id: req.user.user_id
