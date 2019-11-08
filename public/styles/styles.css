@@ -21,3 +21,8 @@ body {
 background: green;
 /* margin-right: 75px; */
 }
+
+.player {
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
