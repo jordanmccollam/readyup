@@ -8,7 +8,22 @@ module.exports = function (app, passport) {
 
   // Dummy page for testing features
   app.get("/test", function (req, res) {
-    res.render("testAuth");
+    console.log(req.user.user_id);
+    db.Profile.findOne({
+      where: {
+        id: req.user.user_id
+      }
+    }).then(function (data) {
+      currentUser = {
+        username: data.username,
+        console: data.console,
+        cod_rank: data.cod_rank,
+        rl_rank: data.rl_rank,
+        fortnite_rank: data.fortnite_rank,
+        room: data.room
+      }
+      res.render("testAuth", currentUser);
+    });
   });
 
   // Authentication Routes
@@ -17,13 +32,39 @@ module.exports = function (app, passport) {
     successRedirect: "/",
     failureRedirect: "/test"
   }));
-//   Above redirects are not working ***
+  //   Above redirects are not working ***
 
-  app.get("/logout", function(req, res) {
+  app.get("/logout", function (req, res) {
     req.logout();
     req.session.destroy();
     res.redirect("/");
-  })
+  });
+
+  app.post("/editProfile", function (req, res) {
+    db.Profile.findOne({
+      where: {
+        id: req.user.user_id
+      }
+    }).then(function (data) {
+      var usernameValue;
+      if (req.body.username.length === 0) {
+        usernameValue = data.username;
+      } else {
+        usernameValue = req.body.username;
+      }
+      db.Profile.update({
+        username: usernameValue,
+        console: req.body.console,
+        rl_rank: req.body.rl_rank
+      }, {
+        where: {
+          id: req.user.user_id
+        }
+      }).then(function (data) {
+        res.redirect("/test");
+      })
+    });
+  });
 
 
   // New user
