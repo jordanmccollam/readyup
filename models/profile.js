@@ -14,25 +14,25 @@ module.exports = function(sequelize, DataTypes) {
     console: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "no preference"
+      defaultValue: "noConsole"
     },
     // Call of Duty rank
     cod_rank: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "not ranked"
+      defaultValue: "notRanked"
     },
     // Rocket League rank
     rl_rank: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "not ranked"
+      defaultValue: "notRanked"
     },
     // Fortnite rank
     fortnite_rank: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "not ranked"
+      defaultValue: "notRanked"
     },
     // Where the player decides what game they currently want to play
     // (Ex: Player could be in the COD room, Rocket League room, or Fortnite room)
