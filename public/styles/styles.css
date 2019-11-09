@@ -13,6 +13,9 @@ body {
 }
 
 #logo {
+  margin-left: 20px;
+  height: 50px;
+  width: 75px;
   overflow:none;
 }
 
