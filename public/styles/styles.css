@@ -50,3 +50,15 @@ body {
   width: 300px !important;
   height: 250px !important;
 }
+
+.player {
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+}
+
+.codIcon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}

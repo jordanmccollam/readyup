@@ -7,22 +7,87 @@ const saltRounds = 10;
 module.exports = function (app, passport) {
 
   // Dummy page for testing features
-  app.get("/test", function (req, res) {
-    res.render("testAuth");
+  app.get("/test", authenticationMiddleware(), function (req, res) {
+    var currentUser;
+    var rlUsers;
+    var fortniteUsers;
+    db.Profile.findOne({
+      where: {
+        id: req.user.user_id
+      }
+    }).then(function (currentUserData) {
+      currentUser = {
+        username: currentUserData.username,
+        console: currentUserData.console,
+        cod_rank: currentUserData.cod_rank,
+        rl_rank: currentUserData.rl_rank,
+        fortnite_rank: currentUserData.fortnite_rank,
+        room: currentUserData.room
+      }
+      res.render("testAuth", currentUser);
+    });
   });
 
-  // Authentication Routes
   // Returning User (Login)
   app.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/test"
+    successRedirect: "/test",
+    failureRedirect: "/"
   }));
-//   Above redirects are not working ***
 
-  app.get("/logout", function(req, res) {
-    req.logout();
-    req.session.destroy();
-    res.redirect("/");
+  // Logout
+  app.get("/logout", function (req, res) {
+    db.Profile.update({
+      room: "waiting"
+    }, {
+      where: {
+        id: req.user.user_id
+      }
+    }).then(function (data) {
+      req.logout();
+      req.session.destroy();
+      res.redirect("/");
+    })
+  });
+
+  app.post("/editProfile", function (req, res) {
+    db.Profile.findOne({
+      where: {
+        id: req.user.user_id
+      }
+    }).then(function (data) {
+      // If username is blank, use pre-existing
+      var usernameValue;
+      if (req.body.username.length === 0) {
+        usernameValue = data.username;
+      } else {
+        usernameValue = req.body.username;
+      }
+
+      db.Profile.update({
+        username: usernameValue,
+        console: req.body.console,
+        rl_rank: req.body.rl_rank,
+        fortnite_rank: req.body.fortnite_rank,
+        cod_rank: req.body.cod_rank
+      }, {
+        where: {
+          id: req.user.user_id
+        }
+      }).then(function (data) {
+        res.redirect("/test");
+      })
+    });
+  });
+
+  // Update room
+  app.post("/updateRoom", function (req, res) {
+    db.Profile.update({
+      room: req.body.room
+    }, {
+      where: {
+        id: req.user.user_id
+      }
+    });
   })
 
 
