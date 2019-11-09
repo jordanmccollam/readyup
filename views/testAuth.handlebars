@@ -1,0 +1,112 @@
+<div class="container mt-5">
+
+
+    <button draggable="true" 
+        class="btn btn-dark player fill 
+        {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
+        <span class="px-4">{{username}}</span>
+    </button>
+
+    <button class="btn btn-success" id="editProfile">Edit Profile</button>
+
+    <div class="modal" tabindex="-1" role="dialog" id="editModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="px-4 py-3" method="POST" action="/editProfile">
+                        <div class="form-group">
+                            <label for="username">Gamer Tag</label>
+                            <input type="text" class="form-control" name="username" placeholder="Unchanged">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="console">Console</label>
+                                <select class="form-control" name="console">
+                                    <option value="{{console}}">Unchanged</option>
+                                    <option value="ps4">PS4</option>
+                                    <option value="xbox">XBOX</option>
+                                    <option value="pc">PC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="rl_rank">Rocket League Rank</label>
+                                <select class="form-control" id="rl_rank" name="rl_rank">
+                                    <option value="{{rl_rank}}">Unchanged</option>
+                                    <option value="bronze1">Bronze 1</option>
+                                    <option value="bronze2">Bronze 2</option>
+                                    <option value="bronze3">Bronze 3</option>
+                                    <option value="silver1">Silver 1</option>
+                                    <option value="silver2">Silver 2</option>
+                                    <option value="silver3">Silver 3</option>
+                                    <option value="gold1">Gold 1</option>
+                                    <option value="gold2">Gold 2</option>
+                                    <option value="gold3">Gold 3</option>
+                                    <option value="plat1">Plat 1</option>
+                                    <option value="plat2">Plat 2</option>
+                                    <option value="plat3">Plat 3</option>
+                                    <option value="d1">Daimond 1</option>
+                                    <option value="d2">Daimond 2</option>
+                                    <option value="d3">Daimond 3</option>
+                                    <option value="champ1">Champ 1</option>
+                                    <option value="champ2">Champ 2</option>
+                                    <option value="champ3">Champ 3</option>
+                                    <option value="grand">Grand Champ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="cod_rank">Call of Duty Skill Level</label>
+                                <select class="form-control" id="cod_rank" name="cod_rank">
+                                    <option value="{{cod_rank}}">Unchanged</option>
+                                    <option value="novice">Novice</option>
+                                    <option value="recruit">Recruit</option>
+                                    <option value="hardened">Hardened</option>
+                                    <option value="veteran">Veteran</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="fortnite_rank">Fortnite League</label>
+                                <select class="form-control" id="fortnite_rank" name="fortnite_rank">
+                                    <option value="{{fortnite_rank}}">Unchanged</option>
+                                    <option value="open1">Open 1</option>
+                                    <option value="open2">Open 2</option>
+                                    <option value="open3">Open 3</option>
+                                    <option value="contender1">Contender 1</option>
+                                    <option value="contender2">Contender 2</option>
+                                    <option value="contender3">Contender 3</option>
+                                    <option value="champ">Champion</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-success rounded-circle">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="lane m-3 p-3 border border-danger rocketLeague" id="rlSection">
+        </div>
+        <div class="lane m-3 p-3 border border-danger cod" id="codSection"></div>
+        <div class="lane m-3 p-3 border border-danger fortnite" id="fortniteSection"></div>
+    </div>
+
+
+
+</div>
