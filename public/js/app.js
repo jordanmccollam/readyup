@@ -46,6 +46,10 @@ $(document).ready(function () {
             newRoom = {
                 room: "fortnite"
             }
+        } else if ($(this).hasClass("waiting")) {
+            newRoom = {
+                room: "waiting"
+            }
         }
 
         this.append(player);
