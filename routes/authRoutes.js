@@ -8,12 +8,18 @@ module.exports = function (app, passport) {
 
   // Dummy page for testing features
   app.get("/queue", authenticationMiddleware(), function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     var currentUser;
     var rlUsers;
     var fortniteUsers;
     db.Profile.findOne({
       where: {
-        id: req.user.user_id
+        id: userID
       }
     }).then(function (currentUserData) {
       currentUser = {
@@ -36,11 +42,17 @@ module.exports = function (app, passport) {
 
   // Logout
   app.get("/logout", function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.update({
       room: "waiting"
     }, {
       where: {
-        id: req.user.user_id
+        id: userID
       }
     }).then(function (data) {
       req.logout();
@@ -50,9 +62,15 @@ module.exports = function (app, passport) {
   });
 
   app.post("/editProfile", function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.findOne({
       where: {
-        id: req.user.user_id
+        id: userID
       }
     }).then(function (data) {
       // If username is blank, use pre-existing
@@ -71,7 +89,7 @@ module.exports = function (app, passport) {
         cod_rank: req.body.cod_rank
       }, {
         where: {
-          id: req.user.user_id
+          id: userID
         }
       }).then(function (data) {
         res.redirect("/queue");
@@ -81,11 +99,17 @@ module.exports = function (app, passport) {
 
   // Update room
   app.post("/updateRoom", function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.update({
       room: req.body.room
     }, {
       where: {
-        id: req.user.user_id
+        id: userID
       }
     });
   })
@@ -102,10 +126,8 @@ module.exports = function (app, passport) {
 
         const user_id = data.id;
 
-        console.log(user_id);
         req.login(user_id, function (err) {
-          console.log(req.user.user_id);
-          res.redirect("/");
+          res.redirect("/queue");
         });
       });
     });
