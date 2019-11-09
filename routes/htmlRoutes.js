@@ -20,6 +20,11 @@ module.exports = function(app) {
     });
   });
 
+  // Render info page
+  app.get("/info", function(req, res){
+    res.render("info");
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
