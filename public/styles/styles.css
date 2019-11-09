@@ -21,3 +21,16 @@ body {
 background: green;
 /* margin-right: 75px; */
 }
+
+.player {
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+}
+
+.codIcon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
