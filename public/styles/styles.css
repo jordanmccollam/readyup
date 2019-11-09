@@ -7,13 +7,12 @@ body {
   background-size: cover;
 }
 
-/* .navbar-brand {
-  margin-left: 40px;
-} */
+.error_background {
+  background: url(../images/error404.png) no-repeat 50% 50% fixed;
+  background-size: cover;
+}
 
 #logo {
-  /* height: 30px;
-  width: 30px; */
   overflow:none;
 }
 
