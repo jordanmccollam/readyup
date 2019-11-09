@@ -43,10 +43,10 @@ $(document).ready(function () {
     $(".fortnite-champ").append("<img src='images/fortniteIcons/champ.jpg' class='rounded' width='25'>");
 
     // COD RANKS
-    $(".cod-novice").append("<div class='rounded-circle codIcon bg-primary' width='25'></div>");
-    $(".cod-recruit").append("<div class='rounded-circle codIcon bg-success' width='25'></div>");
-    $(".cod-hardened").append("<div class='rounded-circle codIcon bg-warning' width='25'></div>");
-    $(".cod-veteran").append("<div class='rounded-circle codIcon bg-danger' width='25'></div>");
+    $(".cod-novice").append("<div class='rounded-circle codIcon bg-primary'></div>");
+    $(".cod-recruit").append("<div class='rounded-circle codIcon bg-success'></div>");
+    $(".cod-hardened").append("<div class='rounded-circle codIcon bg-warning'></div>");
+    $(".cod-veteran").append("<div class='rounded-circle codIcon bg-danger'></div>");
 
 
     // END of jQuery
