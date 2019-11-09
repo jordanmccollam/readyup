@@ -16,19 +16,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: "noConsole"
     },
-    // Call of Duty rank
+    // Call of Duty rank (based on our custom ranks)
     cod_rank: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "notRanked"
     },
-    // Rocket League rank
+    // Rocket League rank 
     rl_rank: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "notRanked"
     },
-    // Fortnite rank
+    // Fortnite rank (based on league)
     fortnite_rank: {
       type: DataTypes.STRING,
       allowNull: false,

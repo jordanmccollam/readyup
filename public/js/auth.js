@@ -42,5 +42,12 @@ $(document).ready(function () {
     $(".fortnite-contender3").append("<img src='images/fortniteIcons/contender3.jpg' class='rounded' width='25'>");
     $(".fortnite-champ").append("<img src='images/fortniteIcons/champ.jpg' class='rounded' width='25'>");
 
+    // COD RANKS
+    $(".cod-novice").append("<div class='rounded-circle codIcon bg-primary' width='25'></div>");
+    $(".cod-recruit").append("<div class='rounded-circle codIcon bg-success' width='25'></div>");
+    $(".cod-hardened").append("<div class='rounded-circle codIcon bg-warning' width='25'></div>");
+    $(".cod-veteran").append("<div class='rounded-circle codIcon bg-danger' width='25'></div>");
+
+
     // END of jQuery
 })

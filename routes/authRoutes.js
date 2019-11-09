@@ -55,17 +55,20 @@ module.exports = function (app, passport) {
         id: req.user.user_id
       }
     }).then(function (data) {
+      // If username is blank, use pre-existing
       var usernameValue;
       if (req.body.username.length === 0) {
         usernameValue = data.username;
       } else {
         usernameValue = req.body.username;
       }
+
       db.Profile.update({
         username: usernameValue,
         console: req.body.console,
         rl_rank: req.body.rl_rank,
-        fortnite_rank: req.body.fortnite_rank
+        fortnite_rank: req.body.fortnite_rank,
+        cod_rank: req.body.cod_rank
       }, {
         where: {
           id: req.user.user_id
