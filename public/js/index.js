@@ -4,6 +4,9 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
+// hide the logout button on the homepage
+$(".btn-secondary-logout").hide();
+
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {

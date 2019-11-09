@@ -3,13 +3,13 @@
 }
 
 body {
-  background: url(../images/readyUpBG.png) no-repeat 50% 50% fixed;
+  background: url(../images/readyUpBG2.png) no-repeat 50% 50% fixed;
   background-size: cover;
 }
 
-.navbar-brand {
-  /* margin-left: 40px; */
-}
+/* .navbar-brand {
+  margin-left: 40px;
+} */
 
 #logo {
   /* height: 30px;
@@ -17,7 +17,45 @@ body {
   overflow:none;
 }
 
-.btn-secondary {
-background: green;
-/* margin-right: 75px; */
+.btn-secondary-login {
+  background: #1bff7e;
+  width: 200px;
+}
+
+.btn-secondary-create {
+  background: #1b98ff;
+  width: 200px;
+}
+
+.btn-secondary-info {
+  background: #cf4b81;
+  width: 200px;
+}
+
+.btn-secondary-logout {
+  background: #c85452;
+  width: 200px;
+}
+
+.btn-success{
+  background: #1b98ff;
+  color: black;
+}
+
+.btn-success:hover{
+  background: #1bff7e;
+  color: black;
+}
+
+.dropdown-menu {
+  width: 300px !important;
+  height: 250px !important;
+}
+
+.contacts {
+  width: 200px;
+  height: 100px;
+  padding-top: 30px;
+  margin-right: 74px;
+  
 }
