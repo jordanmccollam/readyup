@@ -7,7 +7,7 @@ const saltRounds = 10;
 module.exports = function (app, passport) {
 
   // Dummy page for testing features
-  app.get("/test", authenticationMiddleware(), function (req, res) {
+  app.get("/queue", authenticationMiddleware(), function (req, res) {
     var currentUser;
     var rlUsers;
     var fortniteUsers;
@@ -24,13 +24,13 @@ module.exports = function (app, passport) {
         fortnite_rank: currentUserData.fortnite_rank,
         room: currentUserData.room
       }
-      res.render("testAuth", currentUser);
+      res.render("queue", currentUser);
     });
   });
 
   // Returning User (Login)
   app.post("/login", passport.authenticate("local", {
-    successRedirect: "/test",
+    successRedirect: "/queue",
     failureRedirect: "/"
   }));
 
@@ -74,7 +74,7 @@ module.exports = function (app, passport) {
           id: req.user.user_id
         }
       }).then(function (data) {
-        res.redirect("/test");
+        res.redirect("/queue");
       })
     });
   });
@@ -100,10 +100,11 @@ module.exports = function (app, passport) {
         password: hash
       }).then(function (data) {
 
-        const user_id = data.get("id");
+        const user_id = data.id;
 
         console.log(user_id);
         req.login(user_id, function (err) {
+          console.log(req.user.user_id);
           res.redirect("/");
         });
       });

@@ -37,13 +37,13 @@ $(document).ready(function () {
     $(".rocketLeague-grand").append("<img src='images/rocketLeagueIcons/rlGrand.png' width='35'>");
 
     // FORTNITE RANK ICONS
-    $(".fortnite-open1").append("<img src='images/fortniteIcons/open1.jpg' class='rounded' width='25'>");
-    $(".fortnite-open2").append("<img src='images/fortniteIcons/open2.jpg' class='rounded' width='25'>");
-    $(".fortnite-open3").append("<img src='images/fortniteIcons/open3.jpg' class='rounded' width='25'>");
-    $(".fortnite-contender1").append("<img src='images/fortniteIcons/contender1.jpg' class='rounded' width='25'>");
-    $(".fortnite-contender2").append("<img src='images/fortniteIcons/contender2.jpg' class='rounded' width='25'>");
-    $(".fortnite-contender3").append("<img src='images/fortniteIcons/contender3.jpg' class='rounded' width='25'>");
-    $(".fortnite-champ").append("<img src='images/fortniteIcons/champ.jpg' class='rounded' width='25'>");
+    $(".fortnite-open1").append("<img src='images/fortniteIcons/open1.png' class='rounded' width='25'>");
+    $(".fortnite-open2").append("<img src='images/fortniteIcons/open2.png' class='rounded' width='25'>");
+    $(".fortnite-open3").append("<img src='images/fortniteIcons/open3.png' class='rounded' width='25'>");
+    $(".fortnite-contender1").append("<img src='images/fortniteIcons/contender1.png' class='rounded' width='25'>");
+    $(".fortnite-contender2").append("<img src='images/fortniteIcons/contender2.png' class='rounded' width='25'>");
+    $(".fortnite-contender3").append("<img src='images/fortniteIcons/contender3.png' class='rounded' width='25'>");
+    $(".fortnite-champ").append("<img src='images/fortniteIcons/champ.png' class='rounded' width='25'>");
 
     // COD RANKS
     $(".cod-novice").append("<div class='rounded-circle codIcon bg-primary'></div>");

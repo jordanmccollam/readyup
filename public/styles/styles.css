@@ -62,3 +62,35 @@ body {
   height: 20px;
   display: inline-block;
 }
+
+
+#rlSection {
+  background: url(../images/rlbg.jpg);
+  background-size: cover;
+  height: 400px;
+}
+.rlHeader {
+  background: #0366c5;
+}
+
+#codSection {
+  background: url(../images/codbg.jpg);
+  background-size: cover;
+  height: 400px;
+}
+.codHeader {
+  background: rgb(33,37,41);
+}
+
+#fortniteSection {
+  background: url(../images/fortnitebg.png);
+  background-size: cover;
+  height: 400px;
+}
+.fortniteHeader {
+  background: #1a2f6e;
+}
+
+.customFont {
+  font-family: 'Orbitron', sans-serif;
+}

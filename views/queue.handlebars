@@ -1,13 +1,12 @@
+<!-- Image and text -->
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img src="images/readyUpLogo2.png" width="150" height="" class="d-inline-block align-top" id="logo" alt="">
-
     </a>
     <div class="dropdown text-center">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="loginDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Login
-        </button>
+        <a href="/logout"><button class="btn btn-secondary-logout"> <img src="images/button_logout.png" height="30" />
+                Log
+                Out</button></a>
         <div class="dropdown-menu">
             <form class="px-4 py-3" method="POST" action="/login">
                 <div class="form-group">
@@ -23,10 +22,6 @@
         </div>
     </div>
     <div class="dropdown text-center">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="createDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Create Account
-        </button>
         <div class="dropdown-menu">
             <form class="px-4 py-3" method="POST" action="/newuser">
                 <div class="form-group">
@@ -41,38 +36,139 @@
             </form>
         </div>
     </div>
-    <a href="/logout"><button class="btn btn-secondary">Log Out</button></a>
+    <a href="/info"><button class="btn btn-secondary-info"> <img src="images/button_info.png" height="30" /> Contact
+            us</button></a>
 </nav>
-<div class="titles"></div>
-<!-- Start: 1 Row 3 Columns -->
-<div style="margin: -10px;margin-top: 150px;">
-    <div class="container" style="margin-top: 146px;">
-        <div class="row" style="margin-top: 92px;">
-            <div class="col-md-4 rocketleague, rounded"
-                style="background-color: #0366c5;margin-left: -6px;height: 506px;margin-bottom: -43px;">
-                <div id="rl-tab" class="rl-tab"></div><img src="assets/img/rl_banner.jpg"
-                    style="width: 220px;margin-left: 58px;margin-top: 10px;">
-                <div id="rl-que"
-                    style="background-color: #ffffff;height: 398px;min-width: 206px;margin-top: 18px;margin-bottom: 18px;">
+
+
+<div class="container-fluid px-5">
+    <div class="row my-5 py-3">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6 text-right">
+                    <h3 class="customFont">YOU:</h3>
                 </div>
-            </div>
-            <div class="col-md-4 cod, rounded" style="background-color: #32373a;margin-left: 20px;">
-                <div id="mw-col" class="mw-col"><img id="mw-img" class="mw-img" src="assets/img/MW.png"
-                        style="width: 157px;margin-left: 97px;color: rgb(89,100,107);margin-top: 4px;">
-                    <div id="mw-queue" class="mw-queue"
-                        style="height: 397px;background-color: #ffffff;margin-top: 8px;margin-bottom: 5px;margin-right: -4px;">
+                <div class="col-6">
+                    <div class="lane waiting" style="height: 50px;" id="waitingSection">
+                        <button draggable="true" class="btn btn-dark player fill 
+                        {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
+                            <span class="px-4">{{username}}</span>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="col" style="height: 506px;">
-                <div id="fortnite-col" class="fn-col"
-                    style="background-color: #dedede;height: 507px;margin-left: -1px;margin-right: -4px;width: 328px;">
-                    <img id="fn-png" class="fortnite-png" src="assets/img/fornitee.png"
-                        style="width: 187px;margin-left: 72px;margin-top: 18px;">
-                    <div
-                        style="background-color: #ffffff;height: 400px;width: 304px;margin-left: 12px;margin-top: 21px;">
+        </div>
+        <div class="col-6 text-center">
+            <button class="btn btn-lg btn-success" id="editProfile">Edit Profile</button>
+        </div>
+    </div>
+
+
+    <div class="row my-5 d-flex justify-content-around">
+        <div class="col-lg-3 rounded rlHeader text-center">
+            <img src="images/rl_banner.png" width="300">
+            <div id="rlSection" class="lane rocketLeague pt-3 bg-light mb-2"></div>
+        </div>
+        <div class="col-lg-3 rounded codHeader text-center">
+            <img src="images/mw.png" width="200" class="py-2">
+            <div id="codSection" class="lane cod pt-3 bg-light mb-2"></div>
+        </div>
+        <div class="col-lg-3 rounded fortniteHeader text-center">
+            <img src="images/fortnite_banner.png" width="250" class="py-4">
+            <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2"></div>
+        </div>
+    </div>
+    
+</div>
+
+
+{{!-- MODALS --}}
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="px-4 py-3" method="POST" action="/editProfile">
+                    <div class="form-group">
+                        <label for="username">Gamer Tag</label>
+                        <input type="text" class="form-control" name="username" placeholder="Unchanged">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="console">Console</label>
+                            <select class="form-control" name="console">
+                                <option value="{{console}}">Unchanged</option>
+                                <option value="ps4">PS4</option>
+                                <option value="xbox">XBOX</option>
+                                <option value="pc">PC</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="rl_rank">Rocket League Rank</label>
+                            <select class="form-control" id="rl_rank" name="rl_rank">
+                                <option value="{{rl_rank}}">Unchanged</option>
+                                <option value="bronze1">Bronze 1</option>
+                                <option value="bronze2">Bronze 2</option>
+                                <option value="bronze3">Bronze 3</option>
+                                <option value="silver1">Silver 1</option>
+                                <option value="silver2">Silver 2</option>
+                                <option value="silver3">Silver 3</option>
+                                <option value="gold1">Gold 1</option>
+                                <option value="gold2">Gold 2</option>
+                                <option value="gold3">Gold 3</option>
+                                <option value="plat1">Plat 1</option>
+                                <option value="plat2">Plat 2</option>
+                                <option value="plat3">Plat 3</option>
+                                <option value="d1">Daimond 1</option>
+                                <option value="d2">Daimond 2</option>
+                                <option value="d3">Daimond 3</option>
+                                <option value="champ1">Champ 1</option>
+                                <option value="champ2">Champ 2</option>
+                                <option value="champ3">Champ 3</option>
+                                <option value="grand">Grand Champ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="cod_rank">Call of Duty Skill Level</label>
+                            <select class="form-control" id="cod_rank" name="cod_rank">
+                                <option value="{{cod_rank}}">Unchanged</option>
+                                <option value="novice">Novice</option>
+                                <option value="recruit">Recruit</option>
+                                <option value="hardened">Hardened</option>
+                                <option value="veteran">Veteran</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="fortnite_rank">Fortnite League</label>
+                            <select class="form-control" id="fortnite_rank" name="fortnite_rank">
+                                <option value="{{fortnite_rank}}">Unchanged</option>
+                                <option value="open1">Open 1</option>
+                                <option value="open2">Open 2</option>
+                                <option value="open3">Open 3</option>
+                                <option value="contender1">Contender 1</option>
+                                <option value="contender2">Contender 2</option>
+                                <option value="contender3">Contender 3</option>
+                                <option value="champ">Champion</option>
+                            </select>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success rounded-circle">
+                    <i class="fas fa-check"></i>
+                </button>
+                </form>
             </div>
         </div>
     </div>
