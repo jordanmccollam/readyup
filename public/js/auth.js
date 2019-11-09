@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
+    // hide the logout button on the homepage
+    // $(".btn-secondary-logout").hide();
+
     // EDIT PROFILE
-    $("#editProfile").on("click", function() {
+    $("#editProfile").on("click", function () {
         event.preventDefault();
         $("#editModal").modal("show");
     });

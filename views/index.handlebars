@@ -4,10 +4,15 @@
     <img src="images/readyUpLogo2.png" width="150" height="" class="d-inline-block align-top" id="logo" alt="">
   </a>
   <div class="dropdown text-center">
+    {{#if isAuthenticated}}
+    <a href="/logout"><button class="btn btn-secondary-logout"> <img src="images/button_logout.png" height="30" /> Log
+        Out</button></a>
+    {{else}}
     <button class="btn btn-secondary-login dropdown-toggle" type="button" id="loginDropdown" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      <img src="images/button_login.png" height="30" />  Login
+      <img src="images/button_login.png" height="30" /> Login
     </button>
+    {{/if}}
     <div class="dropdown-menu">
       <form class="px-4 py-3" method="POST" action="/login">
         <div class="form-group">
@@ -25,7 +30,7 @@
   <div class="dropdown text-center">
     <button class="btn btn-secondary-create dropdown-toggle" type="button" id="createDropdown" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      <img src="images/button_create.png" height="30" />  Create Account
+      <img src="images/button_create.png" height="30" /> Create Account
     </button>
     <div class="dropdown-menu">
       <form class="px-4 py-3" method="POST" action="/newuser">
@@ -41,9 +46,8 @@
       </form>
     </div>
   </div>
-  <a href="/info"><button class="btn btn-secondary-info"> <img src="images/button_info.png" height="30" /> Contact us</button></a>
-  <a href="/logout"><button class="btn btn-secondary-logout"> <img src="images/button_logout.png" height="30" />  Log
-      Out</button></a>
+  <a href="/info"><button class="btn btn-secondary-info"> <img src="images/button_info.png" height="30" /> Contact
+      us</button></a>
 </nav>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
