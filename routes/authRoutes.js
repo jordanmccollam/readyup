@@ -14,23 +14,51 @@ module.exports = function (app, passport) {
     } else {
       userID = req.user
     }
-    var currentUser;
-    var rlUsers;
-    var fortniteUsers;
     db.Profile.findOne({
       where: {
         id: userID
       }
     }).then(function (currentUserData) {
-      currentUser = {
-        username: currentUserData.username,
-        console: currentUserData.console,
-        cod_rank: currentUserData.cod_rank,
-        rl_rank: currentUserData.rl_rank,
-        fortnite_rank: currentUserData.fortnite_rank,
-        room: currentUserData.room
-      }
-      res.render("queue", currentUser);
+      // currentUser = {
+      //   username: currentUserData.username,
+      //   console: currentUserData.console,
+      //   cod_rank: currentUserData.cod_rank,
+      //   rl_rank: currentUserData.rl_rank,
+      //   fortnite_rank: currentUserData.fortnite_rank,
+      //   room: currentUserData.room
+      // }
+      db.Profile.findAll({
+        where: {
+          room: ["rocketLeague", "fortnite"]
+        }
+      }).then(function (otherUsersData) {
+        var rlPlayers = [];
+        var fortnitePlayers = [];
+        var codPlayers = [];
+        for (var i = 0; i < otherUsersData.length; i++) {
+          if (otherUsersData[i].room === "rocketLeague" && otherUsersData[i].id !== userID) {
+            rlPlayers.push(otherUsersData[i]);
+          } else if (otherUsersData[i].room === "fortnite" && otherUsersData[i].id !== userID) {
+            fortnitePlayers.push(otherUsersData[i]);
+          } else if (otherUsersData[i].room === "cod" && otherUsersData[i].id !== userID) {
+            codPlayers.push(otherUsersData[i]);
+          }
+        }
+        var data = {
+          currentUser: {
+            username: currentUserData.username,
+            console: currentUserData.console,
+            cod_rank: currentUserData.cod_rank,
+            rl_rank: currentUserData.rl_rank,
+            fortnite_rank: currentUserData.fortnite_rank,
+            room: currentUserData.room
+          },
+          rlPlayers: rlPlayers,
+          fortnitePlayers: fortnitePlayers,
+          codPlayers: codPlayers
+        }
+        res.render("queue", data);
+      })
     });
   });
 

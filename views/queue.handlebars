@@ -50,9 +50,10 @@
                 </div>
                 <div class="col-6">
                     <div class="lane waiting" style="height: 50px;" id="waitingSection">
-                        <button draggable="true" class="btn btn-dark player fill 
-                        {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
-                            <span class="px-4">{{username}}</span>
+                        <button draggable="true"
+                            class="btn btn-dark player fill border border-success
+                        {{currentUser.console}} {{currentUser.room}}-{{currentUser.rl_rank}} {{currentUser.room}}-{{currentUser.cod_rank}} {{currentUser.room}}-{{currentUser.fortnite_rank}} {{currentUser.room}}">
+                            <span class="px-4">{{currentUser.username}}</span>
                         </button>
                     </div>
                 </div>
@@ -67,18 +68,42 @@
     <div class="row my-5 d-flex justify-content-around">
         <div class="col-lg-4 rounded rlHeader text-center">
             <img src="images/rl_banner.png" width="300">
-            <div id="rlSection" class="lane rocketLeague pt-3 bg-light mb-2"></div>
+            <div id="rlSection" class="lane rocketLeague pt-3 bg-light mb-2">
+                {{#each rlPlayers}}
+                <button class="btn btn-dark my-3
+                        {{console}} {{room}}-{{rl_rank}} {{room}}">
+                    <span class="px-4">{{username}}</span>
+                </button>
+                <br>
+                {{/each}}
+            </div>
         </div>
         <div class="col-lg-4 rounded codHeader text-center">
             <img src="images/mw.png" width="200" class="py-2">
-            <div id="codSection" class="lane cod pt-3 bg-light mb-2"></div>
+            <div id="codSection" class="lane cod pt-3 bg-light mb-2">
+                {{#each codPlayers}}
+                <button class="btn btn-dark my-3
+                        {{console}} {{room}}-{{cod_rank}} {{room}}">
+                    <span class="px-4">{{username}}</span>
+                </button>
+                <br>
+                {{/each}}
+            </div>
         </div>
         <div class="col-lg-4 rounded fortniteHeader text-center">
             <img src="images/fortnite_banner.png" width="250" class="py-4">
-            <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2"></div>
+            <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2">
+                {{#each fortnitePlayers}}
+                <button class="btn btn-dark my-3
+                        {{console}} {{room}}-{{fortnite_rank}} {{room}}">
+                    <span class="px-4">{{username}}</span>
+                </button>
+                <br>
+                {{/each}}
+            </div>
         </div>
     </div>
-    
+
 </div>
 
 
