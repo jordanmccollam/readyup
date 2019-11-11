@@ -89,6 +89,7 @@ module.exports = function (app, passport) {
     })
   });
 
+  // Edit profile
   app.post("/editProfile", function (req, res) {
     var userID;
     if (req.user.user_id) {

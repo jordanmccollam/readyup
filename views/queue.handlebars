@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-6">
                     <div class="lane waiting" style="height: 50px;" id="waitingSection">
-                        <button draggable="true"
+                        <button draggable="true" data-username="{{currentUser.username}}"
                             class="btn btn-dark player fill border border-success
                         {{currentUser.console}} {{currentUser.room}}-{{currentUser.rl_rank}} {{currentUser.room}}-{{currentUser.cod_rank}} {{currentUser.room}}-{{currentUser.fortnite_rank}} {{currentUser.room}}">
                             <span class="px-4">{{currentUser.username}}</span>
@@ -70,8 +70,8 @@
             <img src="images/rl_banner.png" width="300">
             <div id="rlSection" class="lane rocketLeague pt-3 bg-light mb-2">
                 {{#each rlPlayers}}
-                <button class="btn btn-dark my-3
-                        {{console}} {{room}}-{{rl_rank}} {{room}}">
+                <button class="btn btn-dark my-3 otherUser
+                        {{console}} {{room}}-{{rl_rank}} {{room}}" data-id="{{id}}">
                     <span class="px-4">{{username}}</span>
                 </button>
                 <br>
@@ -82,8 +82,8 @@
             <img src="images/mw.png" width="200" class="py-2">
             <div id="codSection" class="lane cod pt-3 bg-light mb-2">
                 {{#each codPlayers}}
-                <button class="btn btn-dark my-3
-                        {{console}} {{room}}-{{cod_rank}} {{room}}">
+                <button class="btn btn-dark my-3 otherUser
+                        {{console}} {{room}}-{{cod_rank}} {{room}}" data-id="{{id}}">
                     <span class="px-4">{{username}}</span>
                 </button>
                 <br>
@@ -94,8 +94,8 @@
             <img src="images/fortnite_banner.png" width="250" class="py-4">
             <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2">
                 {{#each fortnitePlayers}}
-                <button class="btn btn-dark my-3
-                        {{console}} {{room}}-{{fortnite_rank}} {{room}}">
+                <button class="btn btn-dark my-3 otherUser
+                        {{console}} {{room}}-{{fortnite_rank}} {{room}}" data-id="{{id}}">
                     <span class="px-4">{{username}}</span>
                 </button>
                 <br>
@@ -127,7 +127,7 @@
                         <div class="form-group">
                             <label for="console">Console</label>
                             <select class="form-control" name="console">
-                                <option value="{{console}}">Unchanged</option>
+                                <option value="{{currentUser.console}}">Unchanged</option>
                                 <option value="ps4">PS4</option>
                                 <option value="xbox">XBOX</option>
                                 <option value="pc">PC</option>
@@ -138,7 +138,7 @@
                         <div class="form-group">
                             <label for="rl_rank">Rocket League Rank</label>
                             <select class="form-control" id="rl_rank" name="rl_rank">
-                                <option value="{{rl_rank}}">Unchanged</option>
+                                <option value="{{currentUser.rl_rank}}">Unchanged</option>
                                 <option value="bronze1">Bronze 1</option>
                                 <option value="bronze2">Bronze 2</option>
                                 <option value="bronze3">Bronze 3</option>
@@ -165,7 +165,7 @@
                         <div class="form-group">
                             <label for="cod_rank">Call of Duty Skill Level</label>
                             <select class="form-control" id="cod_rank" name="cod_rank">
-                                <option value="{{cod_rank}}">Unchanged</option>
+                                <option value="{{currentUser.cod_rank}}">Unchanged</option>
                                 <option value="novice">Novice</option>
                                 <option value="recruit">Recruit</option>
                                 <option value="hardened">Hardened</option>
@@ -177,7 +177,7 @@
                         <div class="form-group">
                             <label for="fortnite_rank">Fortnite League</label>
                             <select class="form-control" id="fortnite_rank" name="fortnite_rank">
-                                <option value="{{fortnite_rank}}">Unchanged</option>
+                                <option value="{{currentUser.fortnite_rank}}">Unchanged</option>
                                 <option value="open1">Open 1</option>
                                 <option value="open2">Open 2</option>
                                 <option value="open3">Open 3</option>

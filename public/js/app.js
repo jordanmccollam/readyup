@@ -79,4 +79,20 @@ $(document).ready(function () {
             $("#fortniteSection").append($(".player"));
         }
     }
+
+
+    // EXPERIMENTING with invite functionality
+    // if ($(".player").hasClass("rocketLeague")) {
+    //     $(".otherUser").on("click", function() {
+    //         alert("You invited a player to play Rocket League with you");
+
+    //         var playerInfo = {
+    //             id: $(this).attr("data-id"),
+    //             invitedBy: $(".player").attr("data-username"),
+    //             playing: "Rocket League"
+    //         }
+
+    //         // $.post("/invite")
+    //     })
+    // }
 });
