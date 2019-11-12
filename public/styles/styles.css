@@ -12,20 +12,10 @@ body {
   background-size: cover;
 }
 
-#logo {
-  margin-left: 20px;
-  width: 50px;
-  overflow:none;
-}
-
 .navBtn {
   background: none;
   border: none;
 }
-
-/* button {
-  font-family: 'Orbitron', sans-serif;
-} */
 
 .btn-secondary-login {
   background: #1bff7e;
