@@ -14,14 +14,18 @@ body {
 
 #logo {
   margin-left: 20px;
-  height: 50px;
-  width: 75px;
+  width: 50px;
   overflow:none;
 }
 
-button {
-  font-family: 'Orbitron', sans-serif;
+.navBtn {
+  background: none;
+  border: none;
 }
+
+/* button {
+  font-family: 'Orbitron', sans-serif;
+} */
 
 .btn-secondary-login {
   background: #1bff7e;

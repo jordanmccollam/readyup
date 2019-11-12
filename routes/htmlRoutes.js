@@ -10,7 +10,9 @@ module.exports = function (app) {
 
   // Render info page
   app.get("/info", function (req, res) {
-    res.render("info");
+    res.render("info", data = {
+      isAuthenticated: req.isAuthenticated()
+    });
   });
 
   // Render 404 page for any unmatched routes

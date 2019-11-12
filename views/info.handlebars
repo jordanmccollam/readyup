@@ -1,48 +1,79 @@
-<!-- Image and text -->
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
     <a class="navbar-brand" href="/">
-        <img src="images/readyUpLogo1.png" width="150" height="" class="d-inline-block align-top" id="logo" alt="">
+      <img src="images/logo.png" alt="logo" width="200">
     </a>
-    <div class="dropdown text-center">
-        <button class="btn btn-secondary-login dropdown-toggle" type="button" id="loginDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <img src="images/button_login.png" height="30" />  Login
-        </button>
-        <div class="dropdown-menu">
-            <form class="px-4 py-3" method="POST" action="/login">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/"><img src="images/xBtn.png" alt="triangle" width="15"> Home</a>
+        </li>
+        {{!-- CREATE ACCOUNT --}}
+        {{#if isAuthenticated}}
+        <li class="nav-item">
+          <a href="/queue" class="nav-link"><img src="images/squareBtn.png" height="15"> Ready Up</a>
+          {{else}}
+          <div class="dropdown text-center">
+            <button class="dropdown-toggle nav-link navBtn" type="button" id="createDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img src="images/circleBtn.png" height="15" /> Create Account
+            </button>
+            <div class="dropdown-menu">
+              <form class="px-4 py-3" method="POST" action="/newuser">
                 <div class="form-group">
-                    <label for="username">Username (gamer tag)</label>
-                    <input type="text" class="form-control" placeholder="username" name="username">
+                  <label for="username">Username (gamer tag)</label>
+                  <input type="text" class="form-control" placeholder="username" name="username">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                </div>
-                <button type="submit" class="btn btn-success">Ready Up</button>
-            </form>
-        </div>
-    </div>
-    <div class="dropdown text-center">
-        <button class="btn btn-secondary-create dropdown-toggle" type="button" id="createDropdown"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="images/button_create.png" height="30" />  Create Account
-        </button>
-        <div class="dropdown-menu">
-            <form class="px-4 py-3" method="POST" action="/newuser">
-                <div class="form-group">
-                    <label for="username">Username (gamer tag)</label>
-                    <input type="text" class="form-control" placeholder="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
                 <button type="submit" class="btn btn-success">Ready Up</button>
-            </form>
-        </div>
+              </form>
+            </div>
+          </div>
+          {{/if}}
+          {{!-- LOGIN / LOGOUT --}}
+        <li class="nav-item">
+          {{#if isAuthenticated}}
+          {{!-- If user is logged in, display logout button --}}
+          <a class="nav-link" href="/logout"><img src="images/circleBtn.png" alt="x" width="15"> Logout</a>
+          {{else}}
+          {{!-- If user is logged out, display login button --}}
+          <div class="dropdown">
+            <button class="nav-link dropdown-toggle navBtn" id="loginDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"><img src="images/squareBtn.png" alt="x" width="15">
+              Login</button>
+            <div class="dropdown-menu">
+              <form class="px-4 py-3" method="POST" action="/login">
+                <div class="form-group">
+                  <label for="username">Username (gamer tag)</label>
+                  <input type="text" class="form-control" placeholder="username" name="username">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <button type="submit" class="btn btn-success">Ready Up</button>
+              </form>
+            </div>
+          </div>
+          {{/if}}
+        </li>
+        </li>
+        {{!-- CONTACT / INFO --}}
+        <li class="nav-item active">
+          <a href="/info" class="nav-link"><img src="images/triangleBtn.png" height="15"> Contact us <span
+              class="sr-only">(current)</span></a>
+        </li>
+      </ul>
     </div>
-    {{!-- <a href="/logout"><button class="btn btn-secondary-logout"> <img src="images/button_logout.png" height="30" />  Log
-            Out</button></a> --}}
+  </div>
 </nav>
 
 <div id="main-container" class="container">
@@ -68,8 +99,3 @@
     </section>
 
 </div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
-<script src="js/bootstrap.js"></script>

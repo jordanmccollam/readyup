@@ -1,43 +1,33 @@
-<!-- Image and text -->
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">
-        <img src="images/readyUpLogo2.png" width="150" height="" class="d-inline-block align-top" id="logo" alt="">
-    </a>
-    <div class="dropdown text-center">
-        <a href="/logout"><button class="btn btn-secondary-logout"> <img src="images/button_logout.png" height="30" />
-                Log
-                Out</button></a>
-        <div class="dropdown-menu">
-            <form class="px-4 py-3" method="POST" action="/login">
-                <div class="form-group">
-                    <label for="username">Username (gamer tag)</label>
-                    <input type="text" class="form-control" placeholder="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                </div>
-                <button type="submit" class="btn btn-success">Ready Up</button>
-            </form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="images/logo.png" alt="logo" width="200">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/"><img src="images/xBtn.png" alt="triangle" width="15"> Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/queue" class="nav-link"><img src="images/squareBtn.png" height="15"> Ready Up
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                {{!-- LOGIN / LOGOUT --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><img src="images/circleBtn.png" alt="x" width="15"> Logout</a>
+                </li>
+                {{!-- CONTACT / INFO --}}
+                <li class="nav-item">
+                    <a href="/info" class="nav-link"><img src="images/triangleBtn.png" height="15"> Contact us</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="dropdown text-center">
-        <div class="dropdown-menu">
-            <form class="px-4 py-3" method="POST" action="/newuser">
-                <div class="form-group">
-                    <label for="username">Username (gamer tag)</label>
-                    <input type="text" class="form-control" placeholder="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                </div>
-                <button type="submit" class="btn btn-success">Ready Up</button>
-            </form>
-        </div>
-    </div>
-    <a href="/info"><button class="btn btn-secondary-info"> <img src="images/button_info.png" height="30" /> Contact
-            us</button></a>
 </nav>
 
 
