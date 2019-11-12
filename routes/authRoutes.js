@@ -19,14 +19,6 @@ module.exports = function (app, passport) {
         id: userID
       }
     }).then(function (currentUserData) {
-      // currentUser = {
-      //   username: currentUserData.username,
-      //   console: currentUserData.console,
-      //   cod_rank: currentUserData.cod_rank,
-      //   rl_rank: currentUserData.rl_rank,
-      //   fortnite_rank: currentUserData.fortnite_rank,
-      //   room: currentUserData.room
-      // }
       db.Profile.findAll({
         where: {
           room: ["rocketLeague", "fortnite"]

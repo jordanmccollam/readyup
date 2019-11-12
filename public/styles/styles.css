@@ -12,36 +12,11 @@ body {
   background-size: cover;
 }
 
-#logo {
-  margin-left: 20px;
-  height: 50px;
-  width: 75px;
-  overflow:none;
+.navBtn {
+  background: none;
+  border: none;
 }
 
-button {
-  font-family: 'Orbitron', sans-serif;
-}
-
-.btn-secondary-login {
-  background: #1bff7e;
-  width: 200px;
-}
-
-.btn-secondary-create {
-  background: #1b98ff;
-  width: 200px;
-}
-
-.btn-secondary-info {
-  background: #cf4b81;
-  width: 200px;
-}
-
-.btn-secondary-logout {
-  background: #c85452;
-  width: 200px;
-}
 
 .btn-success{
   background: #1b98ff;
@@ -74,7 +49,7 @@ button {
 #rlSection {
   background: url(../images/rlbg.jpg);
   background-size: cover;
-  height: 400px;
+  min-height: 400px;
 }
 .rlHeader {
   background: #0366c5;
@@ -83,7 +58,7 @@ button {
 #codSection {
   background: url(../images/codbg.jpg);
   background-size: cover;
-  height: 400px;
+  min-height: 400px;
 }
 .codHeader {
   background: rgb(33,37,41);
@@ -92,7 +67,7 @@ button {
 #fortniteSection {
   background: url(../images/fortnitebg.png);
   background-size: cover;
-  height: 400px;
+  min-height: 400px;
 }
 .fortniteHeader {
   background: #1a2f6e;
