@@ -8,23 +8,57 @@ module.exports = function (app, passport) {
 
   // Dummy page for testing features
   app.get("/queue", authenticationMiddleware(), function (req, res) {
-    var currentUser;
-    var rlUsers;
-    var fortniteUsers;
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.findOne({
       where: {
-        id: req.user.user_id
+        id: userID
       }
     }).then(function (currentUserData) {
-      currentUser = {
-        username: currentUserData.username,
-        console: currentUserData.console,
-        cod_rank: currentUserData.cod_rank,
-        rl_rank: currentUserData.rl_rank,
-        fortnite_rank: currentUserData.fortnite_rank,
-        room: currentUserData.room
-      }
-      res.render("queue", currentUser);
+      // currentUser = {
+      //   username: currentUserData.username,
+      //   console: currentUserData.console,
+      //   cod_rank: currentUserData.cod_rank,
+      //   rl_rank: currentUserData.rl_rank,
+      //   fortnite_rank: currentUserData.fortnite_rank,
+      //   room: currentUserData.room
+      // }
+      db.Profile.findAll({
+        where: {
+          room: ["rocketLeague", "fortnite"]
+        }
+      }).then(function (otherUsersData) {
+        var rlPlayers = [];
+        var fortnitePlayers = [];
+        var codPlayers = [];
+        for (var i = 0; i < otherUsersData.length; i++) {
+          if (otherUsersData[i].room === "rocketLeague" && otherUsersData[i].id !== userID) {
+            rlPlayers.push(otherUsersData[i]);
+          } else if (otherUsersData[i].room === "fortnite" && otherUsersData[i].id !== userID) {
+            fortnitePlayers.push(otherUsersData[i]);
+          } else if (otherUsersData[i].room === "cod" && otherUsersData[i].id !== userID) {
+            codPlayers.push(otherUsersData[i]);
+          }
+        }
+        var data = {
+          currentUser: {
+            username: currentUserData.username,
+            console: currentUserData.console,
+            cod_rank: currentUserData.cod_rank,
+            rl_rank: currentUserData.rl_rank,
+            fortnite_rank: currentUserData.fortnite_rank,
+            room: currentUserData.room
+          },
+          rlPlayers: rlPlayers,
+          fortnitePlayers: fortnitePlayers,
+          codPlayers: codPlayers
+        }
+        res.render("queue", data);
+      })
     });
   });
 
@@ -36,11 +70,17 @@ module.exports = function (app, passport) {
 
   // Logout
   app.get("/logout", function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.update({
       room: "waiting"
     }, {
       where: {
-        id: req.user.user_id
+        id: userID
       }
     }).then(function (data) {
       req.logout();
@@ -49,10 +89,17 @@ module.exports = function (app, passport) {
     })
   });
 
+  // Edit profile
   app.post("/editProfile", function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.findOne({
       where: {
-        id: req.user.user_id
+        id: userID
       }
     }).then(function (data) {
       // If username is blank, use pre-existing
@@ -71,7 +118,7 @@ module.exports = function (app, passport) {
         cod_rank: req.body.cod_rank
       }, {
         where: {
-          id: req.user.user_id
+          id: userID
         }
       }).then(function (data) {
         res.redirect("/queue");
@@ -81,11 +128,17 @@ module.exports = function (app, passport) {
 
   // Update room
   app.post("/updateRoom", function (req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
     db.Profile.update({
       room: req.body.room
     }, {
       where: {
-        id: req.user.user_id
+        id: userID
       }
     });
   })
@@ -102,10 +155,8 @@ module.exports = function (app, passport) {
 
         const user_id = data.id;
 
-        console.log(user_id);
         req.login(user_id, function (err) {
-          console.log(req.user.user_id);
-          res.redirect("/");
+          res.redirect("/queue");
         });
       });
     });
