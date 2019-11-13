@@ -21,7 +21,7 @@ module.exports = function (app, passport) {
     }).then(function (currentUserData) {
       db.Profile.findAll({
         where: {
-          room: ["rocketLeague", "fortnite"]
+          room: ["rocketLeague", "fortnite", "cod"]
         }
       }).then(function (otherUsersData) {
         var rlPlayers = [];
@@ -43,7 +43,8 @@ module.exports = function (app, passport) {
             cod_rank: currentUserData.cod_rank,
             rl_rank: currentUserData.rl_rank,
             fortnite_rank: currentUserData.fortnite_rank,
-            room: currentUserData.room
+            room: currentUserData.room,
+            match: currentUserData.match
           },
           rlPlayers: rlPlayers,
           fortnitePlayers: fortnitePlayers,
@@ -51,6 +52,156 @@ module.exports = function (app, passport) {
         }
         res.render("queue", data);
       })
+    });
+  });
+
+  // Match
+  app.post("/rlmatch", function(req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
+
+    db.Profile.findAll({
+      where: {
+        room: "rocketLeague"
+      }
+    }).then(function(data) {
+      db.Profile.findOne({
+        where: {
+          id: userID
+        }
+      }).then(function(currentUserData) {
+        var users = [];
+  
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].id !== userID) {
+            users.push(data[i]);
+          }
+        }
+  
+        for (var x = 0; x < users.length; x++) {
+          if (users[x].rl_rank === currentUserData.rl_rank) {
+  
+            db.Profile.update({
+              match: users[x].username
+            },
+            {
+              where: {
+                id: userID
+              }
+            })
+          }
+  
+        }
+      })
+    })
+  });
+
+  app.post("/codmatch", function(req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
+
+    db.Profile.findAll({
+      where: {
+        room: "cod"
+      }
+    }).then(function(data) {
+      db.Profile.findOne({
+        where: {
+          id: userID
+        }
+      }).then(function(currentUserData) {
+        var users = [];
+  
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].id !== userID) {
+            users.push(data[i]);
+          }
+        }
+  
+        for (var x = 0; x < users.length; x++) {
+          if (users[x].cod_rank === currentUserData.cod_rank) {
+  
+            db.Profile.update({
+              match: users[x].username
+            },
+            {
+              where: {
+                id: userID
+              }
+            })
+          }
+  
+        }
+      })
+    })
+  });
+
+  app.post("/fortnitematch", function(req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
+
+    db.Profile.findAll({
+      where: {
+        room: "fortnite"
+      }
+    }).then(function(data) {
+      db.Profile.findOne({
+        where: {
+          id: userID
+        }
+      }).then(function(currentUserData) {
+        var users = [];
+  
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].id !== userID) {
+            users.push(data[i]);
+          }
+        }
+  
+        for (var x = 0; x < users.length; x++) {
+          if (users[x].fortnite_rank === currentUserData.fortnite_rank) {
+  
+            db.Profile.update({
+              match: users[x].username
+            },
+            {
+              where: {
+                id: userID
+              }
+            })
+          }
+  
+        }
+      })
+    })
+  });
+
+  app.post("/resetMatch", function(req, res) {
+    var userID;
+    if (req.user.user_id) {
+      userID = req.user.user_id
+    } else {
+      userID = req.user
+    }
+    db.Profile.update({
+      match: "none"
+    },
+    {
+      where: {
+        id: userID
+      }
     });
   });
 
