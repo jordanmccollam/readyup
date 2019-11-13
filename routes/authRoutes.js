@@ -93,6 +93,15 @@ module.exports = function (app, passport) {
                 id: userID
               }
             })
+          } else {
+            db.Profile.update({
+              match: "none"
+            },
+            {
+              where: {
+                id: userID
+              }
+            })
           }
   
         }
@@ -137,6 +146,15 @@ module.exports = function (app, passport) {
                 id: userID
               }
             })
+          } else {
+            db.Profile.update({
+              match: "none"
+            },
+            {
+              where: {
+                id: userID
+              }
+            })
           }
   
         }
@@ -175,6 +193,15 @@ module.exports = function (app, passport) {
   
             db.Profile.update({
               match: users[x].username
+            },
+            {
+              where: {
+                id: userID
+              }
+            })
+          } else {
+            db.Profile.update({
+              match: "none"
             },
             {
               where: {
@@ -258,7 +285,9 @@ module.exports = function (app, passport) {
         console: req.body.console,
         rl_rank: req.body.rl_rank,
         fortnite_rank: req.body.fortnite_rank,
-        cod_rank: req.body.cod_rank
+        cod_rank: req.body.cod_rank,
+        room: "waiting",
+        match: "none"
       }, {
         where: {
           id: userID

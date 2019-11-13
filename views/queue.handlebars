@@ -178,13 +178,34 @@
                             </select>
                         </div>
                     </div>
+                    <p class="text-secondary text-center">(On submit you will be taken out of all queues)</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-success rounded-circle">
+                <button type="submit" onclick="editProfile" class="btn btn-outline-success rounded-circle">
                     <i class="fas fa-check"></i>
                 </button>
                 </form>
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="matchModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Match!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p><span id="matchNotification" class="text-success customFont"></span> is your skill level.</p>
+        <p>Find each other in game and party up!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
