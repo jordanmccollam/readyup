@@ -37,19 +37,23 @@ $(document).ready(function () {
         if ($(this).hasClass("rocketLeague")) {
             newRoom = {
                 room: "rocketLeague"
-            }
+            };
+            $.post("/rlmatch");
         } else if ($(this).hasClass("cod")) {
             newRoom = {
                 room: "cod"
-            }
+            };
+            $.post("/codmatch");
         } else if ($(this).hasClass("fortnite")) {
             newRoom = {
                 room: "fortnite"
-            }
+            };
+            $.post("/fortnitematch");
         } else if ($(this).hasClass("waiting")) {
             newRoom = {
                 room: "waiting"
-            }
+            };
+            $.post("/resetMatch");
         }
 
         this.append(player);
@@ -80,32 +84,28 @@ $(document).ready(function () {
         }
     }
 
-
-    // EXPERIMENTING with invite functionality
-    // if ($(".player").hasClass("rocketLeague")) {
-    //     $(".otherUser").on("click", function () {
-    //         alert("You invited a player to play Rocket League with you");
-
-    //         var playerInfo = {
-    //             id: $(this).attr("data-id"),
-    //             invitedBy: $(".player").attr("data-username"),
-    //             playing: "Rocket League"
-    //         }
-
-    //         $.post("/invite")
-    //     })
-    // }
-    matchMake();
-    function matchMake() {
-        if ($(".player").hasClass("rocketLeague") && ($(".otherUser").hasClass("rocketLeague"))) {
-            confirm("You are in a queue with other Rocket League Players. Would you like to Ready Up!?");
-        }
-        else if ($(".player").hasClass("cod") && ($(".otherUser").hasClass("cod"))) {
-            confirm("You are in a queue with other Call of Duty Players. Would you like to Ready Up!?");
-        }
-        else if ($(".player").hasClass("cod") && ($(".otherUser").hasClass("fortnite"))) {
-            confirm("You are in a queue with other Fortnite Players. Would you like to Ready Up!?");
-
+    notify();
+    function notify() {
+        if ($(".player").attr("match") !== "none") {
+            alert($(".player").attr("match") + " is the same rank as you. Find him in game and party up!");
         }
     }
+
+
+    // matchMake();
+    // function matchMake() {
+    //     if ($(".player").hasClass("rocketLeague") && ($(".otherUser").hasClass("rocketLeague"))) {
+
+    //         $.post("/rlmatch");
+            
+    //         // confirm("You are in a queue with other Rocket League Players. Would you like to Ready Up!?");
+    //     }
+    //     else if ($(".player").hasClass("cod") && ($(".otherUser").hasClass("cod"))) {
+    //         // confirm("You are in a queue with other Call of Duty Players. Would you like to Ready Up!?");
+    //     }
+    //     else if ($(".player").hasClass("cod") && ($(".otherUser").hasClass("fortnite"))) {
+    //         // confirm("You are in a queue with other Fortnite Players. Would you like to Ready Up!?");
+
+    //     }
+    // }
 });

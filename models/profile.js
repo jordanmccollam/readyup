@@ -10,6 +10,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    match: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "none"
+    },
     // Which console the user is currently wanting to play on
     console: {
       type: DataTypes.STRING,
@@ -40,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "waiting"
-    },
+    }
   });
   return Profile;
 };

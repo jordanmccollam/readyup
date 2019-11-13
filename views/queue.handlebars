@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-6">
                     <div class="lane waiting" style="height: 50px;" id="waitingSection">
-                        <button draggable="true" data-username="{{currentUser.username}}"
+                        <button draggable="true" match="{{currentUser.match}}"
                             class="btn btn-dark player fill border border-success
                         {{currentUser.console}} {{currentUser.room}}-{{currentUser.rl_rank}} {{currentUser.room}}-{{currentUser.cod_rank}} {{currentUser.room}}-{{currentUser.fortnite_rank}} {{currentUser.room}}">
                             <span class="px-4">{{currentUser.username}}</span>
@@ -61,7 +61,7 @@
             <div id="rlSection" class="lane rocketLeague pt-3 bg-light mb-2">
                 {{#each rlPlayers}}
                 <button class="btn btn-dark my-3 otherUser customFont
-                        {{console}} {{room}}-{{rl_rank}} {{room}}" data-id="{{id}}">
+                        {{console}} {{room}}-{{rl_rank}} {{room}}" data-username="{{username}}">
                     <span class="px-4">{{username}}</span>
                 </button>
                 <br>
@@ -73,7 +73,7 @@
             <div id="codSection" class="lane cod pt-3 bg-light mb-2">
                 {{#each codPlayers}}
                 <button class="btn btn-dark my-3 otherUser customFont
-                        {{console}} {{room}}-{{cod_rank}} {{room}}" data-id="{{id}}">
+                        {{console}} {{room}}-{{cod_rank}} {{room}}" data-username="{{username}}">
                     <span class="px-4">{{username}}</span>
                 </button>
                 <br>
@@ -85,7 +85,7 @@
             <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2">
                 {{#each fortnitePlayers}}
                 <button class="btn btn-dark my-3 otherUser customFont
-                        {{console}} {{room}}-{{fortnite_rank}} {{room}}" data-id="{{id}}">
+                        {{console}} {{room}}-{{fortnite_rank}} {{room}}" data-username="{{username}}">
                     <span class="px-4">{{username}}</span>
                 </button>
                 <br>
