@@ -25,12 +25,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Middleware for Authentication
-var options = {
-  host: config.host,
-  port: 3306,
-  user: config.username,
-  password: config.password,
-  database: config.database
+var options;
+if (process.env.JAWSDB_URL) {
+  options = process.env.JAWSDB_URL;
+} else {
+  options = {
+    host: config.host,
+    port: 3306,
+    user: config.username,
+    password: config.password,
+    database: config.database
+  }
 }
 var sessionStore = new MySQLStore(options);
 app.use(session({
