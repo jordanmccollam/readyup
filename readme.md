@@ -32,7 +32,7 @@ Getting matchmaking prompts to work when multiple players are in the same queue.
 ## Improvements
 We will look to incorporate a lot more games into the queue spanning across all genres. 
 Adding in real time invites.
-Add a chat feature.
+Add a way to auto link users discorc usernames into their profile to enhance the discord chat feature.
 
 ## Demo
 ![Demo](public/videos/demo.mp4)
