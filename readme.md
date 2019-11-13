@@ -20,11 +20,11 @@ We are a team of four developers who contributed the following to this project:
 
 Cameron Wilson - Managed the GitHub repo, created landing and contact pages, css sytlying, helped create logic for matchmaking, helped on presentation and readme, added discord server chat functionality.
 
-Jordan McCollum - Created the majority of the backend logic using JavaScript for authentication, login/logout functionality, logic for the gamers being able to move between queues, created Data Base, helped create logic for matchmaking.
+Jordan McCollam - Created the majority of the backend logic using JavaScript for authentication, login/logout functionality, logic for the gamers being able to move between queues, created Data Base, helped create logic for matchmaking.
 
 Jacob Hines - Created the background and logo, created the Queue page, image guru and styling, helped on presentation, demo video.
 
-Ewin Tucker -
+Ewin Tucker - Helped with css sytling 
 
 ### Challenges
 Getting matchmaking prompts to work when multiple players are in the same queue.
