@@ -18,18 +18,18 @@ In managing this project we delegated out who would managed the repo, worked tog
 ## Individual Responsibilities.
 We are a team of four developers who contributed the following to this project:
 
-Cameron Wilson - Managed the GitHub repo, created landing and contact pages, css sytlying, helped create logic for matchmaking, helped on presentation and readme.
+Cameron Wilson - Managed the GitHub repo, created landing and contact pages, css sytlying, helped create logic for matchmaking, helped on presentation and readme, added discord server chat functionality.
 
-Jordan McCollum - Created the majority of the backend logic using JavaScript for authentication, login/logout functionality, logic for the gamers being able to move between queues, creaated Data Base.
+Jordan McCollum - Created the majority of the backend logic using JavaScript for authentication, login/logout functionality, logic for the gamers being able to move between queues, created Data Base, helped create logic for matchmaking.
 
-Jacob Hines - Created the background and logo, created the Queue page, image guru and styling, helped on presentation.
+Jacob Hines - Created the background and logo, created the Queue page, image guru and styling, helped on presentation, demo video.
 
-Ewin Tucker - 
+Ewin Tucker -
 
 ### Challenges
-Describe any challenges you and/or your team encountered
-that you personally played an important role in resolving.
+Getting matchmaking prompts to work when multiple players are in the same queue.
 
 ## Improvements
 We will look to incorporate a lot more games into the queue spanning across all genres. 
 Adding in real time invites.
+Add a chat feature.

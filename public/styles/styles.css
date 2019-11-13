@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url(../images/readyUpBG2.png) no-repeat 50% 80% fixed;
+  background: url(../images/plainBG.png) no-repeat 50% 80% fixed;
   background-size: cover;
 }
 
@@ -75,4 +75,23 @@ body {
 
 .customFont {
   font-family: 'Orbitron', sans-serif;
+}
+
+.main_image {
+  display: block;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 40%;
+  width: 40%;
+}
+
+.main-section {
+  padding-top: 40px;
+  float: left;
+}
+
+.discord {
+  padding-top: 40px;
+  margin: auto;
 }
