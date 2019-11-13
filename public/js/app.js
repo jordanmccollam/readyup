@@ -54,7 +54,7 @@ $(document).ready(function () {
 
         this.append(player);
         $.post("/updateRoom", newRoom);
-        setTimeout(function() {
+        setTimeout(function () {
             window.location.reload();
         }, 500);
     }
@@ -83,7 +83,7 @@ $(document).ready(function () {
 
     // EXPERIMENTING with invite functionality
     // if ($(".player").hasClass("rocketLeague")) {
-    //     $(".otherUser").on("click", function() {
+    //     $(".otherUser").on("click", function () {
     //         alert("You invited a player to play Rocket League with you");
 
     //         var playerInfo = {
@@ -92,7 +92,20 @@ $(document).ready(function () {
     //             playing: "Rocket League"
     //         }
 
-    //         // $.post("/invite")
+    //         $.post("/invite")
     //     })
     // }
+    matchMake();
+    function matchMake() {
+        if ($(".player").hasClass("rocketLeague") && ($(".otherUser").hasClass("rocketLeague"))) {
+            confirm("You are in a queue with other Rocket League Players. Would you like to Ready Up!?");
+        }
+        else if ($(".player").hasClass("cod") && ($(".otherUser").hasClass("cod"))) {
+            confirm("You are in a queue with other Call of Duty Players. Would you like to Ready Up!?");
+        }
+        else if ($(".player").hasClass("cod") && ($(".otherUser").hasClass("fortnite"))) {
+            confirm("You are in a queue with other Fortnite Players. Would you like to Ready Up!?");
+
+        }
+    }
 });
