@@ -3,6 +3,24 @@ var db = require("../models");
 module.exports = function (app) {
   // Load index page
   app.get("/", function (req, res) {
+    if (req.isAuthenticated()) {
+      var userID;
+      if (req.user.user_id) {
+        userID = req.user.user_id;
+      } else {
+        userID = req.user;
+      }
+      db.Profile.update({
+        room: "waiting",
+        match: "none"
+      },
+      {
+        where: {
+          id: userID
+        }
+      })
+    }
+
       res.render("index", data = {
         isAuthenticated: req.isAuthenticated()
       });
@@ -10,6 +28,24 @@ module.exports = function (app) {
 
   // Render info page
   app.get("/info", function (req, res) {
+    if (req.isAuthenticated()) {
+      var userID;
+      if (req.user.user_id) {
+        userID = req.user.user_id;
+      } else {
+        userID = req.user;
+      }
+      db.Profile.update({
+        room: "waiting",
+        match: "none"
+      },
+      {
+        where: {
+          id: userID
+        }
+      })
+    }
+
     res.render("info", data = {
       isAuthenticated: req.isAuthenticated()
     });
