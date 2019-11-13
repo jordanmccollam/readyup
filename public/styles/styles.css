@@ -76,3 +76,9 @@ body {
 .customFont {
   font-family: 'Orbitron', sans-serif;
 }
+
+#contact {
+  color:#2EB781;
+  font-weight: bold;
+}
+

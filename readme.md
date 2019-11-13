@@ -20,11 +20,11 @@ We are a team of four developers who contributed the following to this project:
 
 Cameron Wilson - Managed the GitHub repo, created landing and contact pages, css sytlying, helped create logic for matchmaking, helped on presentation and readme.
 
-Jordan McCollum - Created the majority of the backend logic using JavaScript for authentication, login/logout functionality, logic for the gamers being able to move between queues, creaated Data Base.
+Jordan McCollum - Created the majority of the backend logic using JavaScript for authentication, login/logout functionality, logic for the gamers being able to move between queues, created Data Base.
 
 Jacob Hines - Created the background and logo, created the Queue page, image guru and styling, helped on presentation.
 
-Ewin Tucker - 
+Ewin Tucker - Helped with css sytling 
 
 ### Challenges
 Describe any challenges you and/or your team encountered
