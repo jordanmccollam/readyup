@@ -10,7 +10,7 @@ Ready Up is the premier LFG esque application for gamers. Ready Up will allow ga
 Gamers today don't always want to rely on in game matchmaking and instead want ways to meet other gamers that have their similar skill or rank. Ready Up sets out to offer gamers a way to do just that by haveing them create an account and join a queue of the games offered and then give them the option to join others seeking the same. 
 
 ## Results
-Once gamers create an account on Ready Up, they can then join a queue of the available games to be matched with. They can also switch between queues, edit their profile or visit the contact page to view various Ready Up social pages or send an email.
+Once gamers create an account on Ready Up, they can then join a queue of the available games to be matched with. They can also switch between queues, edit their profile or visit the contact page to view various Ready Up social pages, send an email or join the discord server and chat with other gamers.
 
 ## Team Efforts
 In managing this project we delegated out who would managed the repo, worked together on merges but also created a KanBan board with user stories and each developer would pull the story they wanted to work on.
@@ -32,4 +32,7 @@ Getting matchmaking prompts to work when multiple players are in the same queue.
 ## Improvements
 We will look to incorporate a lot more games into the queue spanning across all genres. 
 Adding in real time invites.
-Add a chat feature.
+Add a way to auto link users discorc usernames into their profile to enhance the discord chat feature.
+
+## Demo
+![Demo](public/videos/demo.mp4)
