@@ -42,7 +42,7 @@ app.use(session({
   store: sessionStore,
   saveUninitialized: false,
   // If using HTTPS make sure to uncomment the line below *
-  cookie: { secure: true }
+  // cookie: { secure: true }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
