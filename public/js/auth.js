@@ -22,6 +22,9 @@ $(document).ready(function () {
     $(".rocketLeague-bronze1").append("<img src='images/rocketLeagueIcons/rlBronze1.png' width='35'>");
     $(".rocketLeague-bronze2").append("<img src='images/rocketLeagueIcons/rlBronze2.png' width='35'>");
     $(".rocketLeague-bronze3").append("<img src='images/rocketLeagueIcons/rlBronze3.png' width='35'>");
+    $(".rocketLeague-silver1").append("<img src='images/rocketLeagueIcons/rlSilver1.png' width='35'>");
+    $(".rocketLeague-silver2").append("<img src='images/rocketLeagueIcons/rlSilver2.png' width='35'>");
+    $(".rocketLeague-silver3").append("<img src='images/rocketLeagueIcons/rlSilver3.png' width='35'>");
     $(".rocketLeague-gold1").append("<img src='images/rocketLeagueIcons/rlGold1.png' width='35'>");
     $(".rocketLeague-gold2").append("<img src='images/rocketLeagueIcons/rlGold2.png' width='35'>");
     $(".rocketLeague-gold3").append("<img src='images/rocketLeagueIcons/rlGold3.png' width='35'>");
