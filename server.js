@@ -1,5 +1,4 @@
 require("dotenv").config();
-var redis = require("redis").createClient();
 var express = require("express");
 var exphbs = require("express-handlebars");
 var path = require("path");
@@ -18,17 +17,6 @@ var bcrypt = require("bcrypt");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
-
-if (process.env.REDISTOGO_URL) {
-  // inside if statement
-var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-var redis = require("redis").createClient(rtg.port, rtg.hostname);
-
-redis.auth(rtg.auth.split(":")[1]);
-} else {
-  var redis = require("redis").createClient();
-}
-
 
 // Middleware
 app.use(express.urlencoded({
