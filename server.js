@@ -41,6 +41,9 @@ app.use(session({
   resave: false,
   store: sessionStore,
   saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
   // If using HTTPS make sure to uncomment the line below *
   // cookie: { secure: true }
 }));
