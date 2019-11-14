@@ -27,11 +27,11 @@ app.use(express.static("public"));
 
 // Middleware for Authentication
   var options = {
-    host: kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com,
+    host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     port: 3306,
-    user: duj3hj41l7leydji,
-    password: osa5lial2f22x1nl,
-    database: c3reychmec54nnqc
+    user: "duj3hj41l7leydji",
+    password: "osa5lial2f22x1nl",
+    database: "c3reychmec54nnqc"
   }
 
 var sessionStore = new MySQLStore(options);
