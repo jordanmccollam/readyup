@@ -1,6 +1,7 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+var path = require("path");
 var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/config/config.json")[env];
 
