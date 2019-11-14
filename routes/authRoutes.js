@@ -7,7 +7,7 @@ const saltRounds = 10;
 module.exports = function (app, passport) {
 
   // Dummy page for testing features
-  app.get("/queue", authenticationMiddleware(), function (req, res) {
+  app.get("/queue", function (req, res) {
     var userID;
     if (req.user.user_id) {
       userID = req.user.user_id
