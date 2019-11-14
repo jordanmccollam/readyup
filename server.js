@@ -26,18 +26,14 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Middleware for Authentication
-var options;
-if (process.env.JAWSDB_URL) {
-  options = process.env.JAWSDB_URL;
-} else {
-  options = {
-    host: config.host,
+  var options = {
+    host: kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com,
     port: 3306,
-    user: config.username,
-    password: config.password,
-    database: config.database
+    user: duj3hj41l7leydji,
+    password: osa5lial2f22x1nl,
+    database: c3reychmec54nnqc
   }
-}
+
 var sessionStore = new MySQLStore(options);
 app.use(session({
   // Secret should be a random string
