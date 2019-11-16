@@ -20,10 +20,12 @@ var PORT = process.env.PORT || 3000;
 
 
 io.on("connection", function (socket) {
+
   socket.on("room update", function (newRoom) {
     // io.emit("room update", newRoom);
     db.Profile.update({
-      room: newRoom.room
+      room: newRoom.room,
+      match: "none"
     }, {
       where: {
         id: newRoom.id
@@ -97,7 +99,131 @@ io.on("connection", function (socket) {
         })
       })
     })
-  })
+  });
+
+  // Matching
+  socket.on("rl match", function(ownID) {
+    db.Profile.findOne({
+      where: {id: ownID}
+    }).then(function(oldUserData) {
+      db.Profile.findAll({
+        where: {room: "rocketLeague"}
+      }).then(function(RlUsers) {
+        var bestMatch;
+        var bestMatchID;
+        for (var x = 0; x < RlUsers.length; x++) {
+          if (RlUsers[x].rl_rank === oldUserData.rl_rank && RlUsers[x].id !== oldUserData.id) {
+            bestMatch = RlUsers[x].username;
+            db.Profile.update({
+              match: bestMatch
+            },{
+              where: {id: ownID}
+            }).then(function() {
+              db.Profile.findOne({
+                where: {id: ownID}
+              }).then(function(currentUserData) {
+                io.emit("rl match", currentUserData);
+              })
+            })
+          } else {
+            db.Profile.update({
+              match: "none"
+            },{
+              where: {id: ownID}
+            }).then(function() {
+              db.Profile.findOne({
+                where: {id: ownID}
+              }).then(function(currentUserData) {
+                io.emit("rl match", currentUserData);
+              })
+            })
+          };
+        }
+      })
+    })
+  });
+  socket.on("cod match", function(ownID) {
+    db.Profile.findOne({
+      where: {id: ownID}
+    }).then(function(oldUserData) {
+      db.Profile.findAll({
+        where: {room: "cod"}
+      }).then(function(codUsers) {
+        var bestMatch;
+
+        for (var x = 0; x < codUsers.length; x++) {
+          if (codUsers[x].cod_rank === oldUserData.cod_rank && codUsers[x].id !== oldUserData.id) {
+            bestMatch = codUsers[x].username;
+
+            db.Profile.update({
+              match: bestMatch
+            },{
+              where: {id: ownID}
+            }).then(function() {
+              db.Profile.findOne({
+                where: {id: ownID}
+              }).then(function(currentUserData) {
+                io.emit("cod match", currentUserData);
+              })
+            })
+          } else {
+            db.Profile.update({
+              match: "none"
+            },{
+              where: {id: ownID}
+            }).then(function() {
+              db.Profile.findOne({
+                where: {id: ownID}
+              }).then(function(currentUserData) {
+                io.emit("cod match", currentUserData);
+              })
+            })
+          }
+        }
+      })
+    })
+  });
+  socket.on("fortnite match", function(ownID) {
+    db.Profile.findOne({
+      where: {id: ownID}
+    }).then(function(oldUserData) {
+      db.Profile.findAll({
+        where: {room: "fortnite"}
+      }).then(function(fortniteUsers) {
+        var bestMatch;
+
+        for (var x = 0; x < fortniteUsers.length; x++) {
+          if (fortniteUsers[x].fortnite_rank === oldUserData.fortnite_rank && fortniteUsers[x].id !== oldUserData.id) {
+            bestMatch = fortniteUsers[x].username;
+
+            db.Profile.update({
+              match: bestMatch
+            },{
+              where: {id: ownID}
+            }).then(function() {
+              db.Profile.findOne({
+                where: {id: ownID}
+              }).then(function(currentUserData) {
+                io.emit("fortnite match", currentUserData);
+              })
+            })
+          } else {
+            db.Profile.update({
+              match: "none"
+            },{
+              where: {id: ownID}
+            }).then(function() {
+              db.Profile.findOne({
+                where: {id: ownID}
+              }).then(function(currentUserData) {
+                io.emit("fortnite match", currentUserData);
+              })
+            })
+          }
+        }
+      })
+    })
+  });
 });
 
 // Middleware
@@ -108,22 +234,22 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Middleware for Authentication
-var options = {
-  host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-  port: 3306,
-  user: "duj3hj41l7leydji",
-  password: "osa5lial2f22x1nl",
-  database: "c3reychmec54nnqc"
-}
+// var options = {
+//   host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+//   port: 3306,
+//   user: "duj3hj41l7leydji",
+//   password: "osa5lial2f22x1nl",
+//   database: "c3reychmec54nnqc"
+// }
 
 // FOR TESTING USE CODE BELOW (and comment out ^)
-// var options = {
-//   host: "localhost",
-//   port: 3306,
-//   user: "jordanM",
-//   password: "jojo1997",
-//   database: "readyUp_db"
-// }
+var options = {
+  host: "localhost",
+  port: 3306,
+  user: "jordanM",
+  password: "jojo1997",
+  database: "readyUp_db"
+}
 
 var sessionStore = new MySQLStore(options);
 app.use(session({

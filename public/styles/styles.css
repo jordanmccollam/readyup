@@ -37,6 +37,14 @@ body {
   font-size: 20px;
   font-family: 'Orbitron', sans-serif;
   position: relative;
+  margin: 5px;
+}
+
+.profileBar {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .codIcon {

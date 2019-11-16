@@ -35,26 +35,29 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <button class="btn btn-dark btn-block" id="editProfile">
-                <h1 class="customFont currentUserId profileBar {{currentUser.console}} {{currentUser.room}}-{{currentUser.rl_rank}} {{currentUser.room}}-{{currentUser.cod_rank}} {{currentUser.room}}-{{currentUser.fortnite_rank}}"
+            <button class="btn btn-dark btn-block profileBar" id="editProfile-{{currentUser.id}}">
+                <h1 id="profileBar-{{currentUser.id}}" class="customFont currentUserId {{currentUser.console}} {{currentUser.rl_rank}} {{currentUser.cod_rank}} {{currentUser.fortnite_rank}}"
                     data-id="{{currentUser.id}}">
                     <div class="container">
                         <div class="row">
-                            <div class="col-4 consoleDisplay"></div>
+                            <div class="col-2 consoleDisplay"></div>
+                            <div class="col-2"></div>
                             <div class="col-4" id="profileName">{{currentUser.username}}</div>
-                            <div class="col-4 iconDisplay"></div>
+                            <div class="col-1 rlIcon"></div>
+                            <div class="col-2 codIcon"></div>
+                            <div class="col-1 fortniteIcon"></div>
                         </div>
                     </div>
                 </h1>
             </button>
-            <p class="text-secondary mt-1">Tap the Profile Bar to edit your profile. Tap the X to leave all queues. <button class="btn btn-danger btn-sm customFont" id="leaveQueues">X</button></p>
+            <p class="text-secondary mt-1">Tap the Profile Bar to edit your profile. Tap the X to leave all queues. <button class="btn btn-outline-danger btn-sm customFont rounded-circle" id="leaveQueues">X</button></p>
         </div>
     </div>
 </div>
 
 {{!-- GAME LANES --}}
 <div class="container-fluid px-5">
-    <div class="row my-5 d-flex justify-content-around">
+    <div class="row mt-3 mb-5 d-flex justify-content-around">
         <div class="col-lg-4 rounded rlHeader text-center">
             <img src="images/rl_banner.png" width="300">
             <br>
@@ -63,12 +66,11 @@
                 {{#each rlPlayers}}
                 <button id="{{id}}" match="{{match}}"
                     class="btn btn-dark player fill border border-success
-                            {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
+                            {{console}} {{rl_rank}} {{room}}">
                     <span class="consoleDisplay"></span>
                     <span class="px-4">{{username}}</span>
                     <span class="iconDisplay"></span>
                 </button>
-                <br>
                 {{/each}}
             </div>
         </div>
@@ -80,12 +82,11 @@
                 {{#each codPlayers}}
                 <button id="{{id}}" match="{{match}}"
                     class="btn btn-dark player fill border border-success
-                            {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
+                            {{console}} {{cod_rank}} {{room}}">
                     <span class="consoleDisplay"></span>
                     <span class="px-4">{{username}}</span>
                     <span class="iconDisplay"></span>
                 </button>
-                <br>
                 {{/each}}
             </div>
         </div>
@@ -96,12 +97,11 @@
             <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2">
                 {{#each fortnitePlayers}}
                 <button id="{{id}}" match="{{match}}" class="btn btn-dark player fill border border-success
-                            {{console}} {{room}}-{{fortnite_rank}} {{room}}">
+                            {{console}} {{fortnite_rank}} {{room}}">
                     <span class="consoleDisplay"></span>
                     <span class="px-4">{{username}}</span>
                     <span class="iconDisplay"></span>
                 </button>
-                <br>
                 {{/each}}
             </div>
         </div>
@@ -193,7 +193,6 @@
                             </select>
                         </div>
                     </div>
-                    <p class="text-secondary text-center">(On submit you will be taken out of all queues)</p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-success rounded-circle" id="editSubmit">
@@ -205,7 +204,8 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="matchModal">
+<div id="matchContainer-{{currentUser.id}}">
+<div class="modal" tabindex="-1" role="dialog" id="matchModal-{{currentUser.id}}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -223,4 +223,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
