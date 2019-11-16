@@ -1,3 +1,4 @@
+{{!-- NAV --}}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -30,39 +31,42 @@
     </div>
 </nav>
 
-
-<div class="container-fluid px-5">
-    <div class="row my-5 py-3">
-        <div class="col-6">
-            <div class="row">
-                <div class="col-6 text-right">
-                    <h3 class="customFont">YOU:</h3>
-                </div>
-                <div class="col-6">
-                    <div class="lane waiting" style="height: 50px;" id="waitingSection">
-                        <button draggable="true" match="{{currentUser.match}}"
-                            class="btn btn-dark player fill border border-success
-                        {{currentUser.console}} {{currentUser.room}}-{{currentUser.rl_rank}} {{currentUser.room}}-{{currentUser.cod_rank}} {{currentUser.room}}-{{currentUser.fortnite_rank}} {{currentUser.room}}">
-                            <span class="px-4">{{currentUser.username}}</span>
-                        </button>
+{{!-- USER SECTION --}}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn btn-dark btn-block" id="editProfile">
+                <h1 class="customFont currentUserId profileBar {{currentUser.console}} {{currentUser.room}}-{{currentUser.rl_rank}} {{currentUser.room}}-{{currentUser.cod_rank}} {{currentUser.room}}-{{currentUser.fortnite_rank}}"
+                    data-id="{{currentUser.id}}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4 consoleDisplay"></div>
+                            <div class="col-4" id="profileName">{{currentUser.username}}</div>
+                            <div class="col-4 iconDisplay"></div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 text-center">
-            <button class="btn btn-lg btn-success" id="editProfile">Edit Profile</button>
+                </h1>
+            </button>
+            <p class="text-secondary mt-1">Tap the Profile Bar to edit your profile. Tap the X to leave all queues. <button class="btn btn-danger btn-sm customFont" id="leaveQueues">X</button></p>
         </div>
     </div>
+</div>
 
-
+{{!-- GAME LANES --}}
+<div class="container-fluid px-5">
     <div class="row my-5 d-flex justify-content-around">
         <div class="col-lg-4 rounded rlHeader text-center">
             <img src="images/rl_banner.png" width="300">
+            <br>
+            <button class="btn btn-outline-light customFont mb-3" id="enterRl">ENTER</button>
             <div id="rlSection" class="lane rocketLeague pt-3 bg-light mb-2">
                 {{#each rlPlayers}}
-                <button class="btn btn-dark my-3 otherUser customFont
-                        {{console}} {{room}}-{{rl_rank}} {{room}}" data-username="{{username}}">
+                <button id="{{id}}" match="{{match}}"
+                    class="btn btn-dark player fill border border-success
+                            {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
+                    <span class="consoleDisplay"></span>
                     <span class="px-4">{{username}}</span>
+                    <span class="iconDisplay"></span>
                 </button>
                 <br>
                 {{/each}}
@@ -70,11 +74,16 @@
         </div>
         <div class="col-lg-4 rounded codHeader text-center">
             <img src="images/MW.png" width="200" class="py-2">
+            <br>
+            <button class="btn btn-outline-light customFont mb-3" id="enterCod">ENTER</button>
             <div id="codSection" class="lane cod pt-3 bg-light mb-2">
                 {{#each codPlayers}}
-                <button class="btn btn-dark my-3 otherUser customFont
-                        {{console}} {{room}}-{{cod_rank}} {{room}}" data-username="{{username}}">
+                <button id="{{id}}" match="{{match}}"
+                    class="btn btn-dark player fill border border-success
+                            {{console}} {{room}}-{{rl_rank}} {{room}}-{{cod_rank}} {{room}}-{{fortnite_rank}} {{room}}">
+                    <span class="consoleDisplay"></span>
                     <span class="px-4">{{username}}</span>
+                    <span class="iconDisplay"></span>
                 </button>
                 <br>
                 {{/each}}
@@ -82,11 +91,15 @@
         </div>
         <div class="col-lg-4 rounded fortniteHeader text-center">
             <img src="images/fortnite_banner.png" width="250" class="py-4">
+            <br>
+            <button class="btn btn-outline-light customFont mb-3" id="enterFortnite">ENTER</button>
             <div id="fortniteSection" class="lane fortnite pt-3 bg-light mb-2">
                 {{#each fortnitePlayers}}
-                <button class="btn btn-dark my-3 otherUser customFont
-                        {{console}} {{room}}-{{fortnite_rank}} {{room}}" data-username="{{username}}">
+                <button id="{{id}}" match="{{match}}" class="btn btn-dark player fill border border-success
+                            {{console}} {{room}}-{{fortnite_rank}} {{room}}">
+                    <span class="consoleDisplay"></span>
                     <span class="px-4">{{username}}</span>
+                    <span class="iconDisplay"></span>
                 </button>
                 <br>
                 {{/each}}
@@ -108,15 +121,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="px-4 py-3" method="POST" action="/editProfile">
+                {{!-- <form class="px-4 py-3" method="POST" action="/editProfile"> --}}
+                <form class="px-4 py-3">
                     <div class="form-group">
                         <label for="username">Gamer Tag</label>
-                        <input type="text" class="form-control" name="username" placeholder="Unchanged">
+                        <input type="text" class="form-control" name="username" placeholder="Unchanged"
+                            id="editUsername">
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label for="console">Console</label>
-                            <select class="form-control" name="console">
+                            <select class="form-control" name="console" id="editConsole">
                                 <option value="{{currentUser.console}}">Unchanged</option>
                                 <option value="ps4">PS4</option>
                                 <option value="xbox">XBOX</option>
@@ -127,7 +142,7 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="rl_rank">Rocket League Rank</label>
-                            <select class="form-control" id="rl_rank" name="rl_rank">
+                            <select class="form-control" id="rl_rank" name="rl_rank" id="rl_rank">
                                 <option value="{{currentUser.rl_rank}}">Unchanged</option>
                                 <option value="bronze1">Bronze 1</option>
                                 <option value="bronze2">Bronze 2</option>
@@ -181,7 +196,7 @@
                     <p class="text-secondary text-center">(On submit you will be taken out of all queues)</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" onclick="editProfile" class="btn btn-outline-success rounded-circle">
+                <button type="submit" class="btn btn-outline-success rounded-circle" id="editSubmit">
                     <i class="fas fa-check"></i>
                 </button>
                 </form>
@@ -191,21 +206,21 @@
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="matchModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Match!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <p><span id="matchNotification" class="text-success customFont"></span> is your skill level.</p>
-        <p>Find each other in game and party up!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Match!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p><span id="matchNotification" class="text-success customFont"></span> is your skill level.</p>
+                <p>Find each other in game and party up!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

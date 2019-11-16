@@ -4,7 +4,6 @@ var exphbs = require("express-handlebars");
 var path = require("path");
 var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/config/config.json")[env];
-
 var db = require("./models");
 
 // Auth Packages
@@ -14,9 +13,92 @@ var LocalStrategy = require('passport-local').Strategy;
 var MySQLStore = require('express-mysql-session')(session);
 var bcrypt = require("bcrypt");
 
-
 var app = express();
+var http = require("http").createServer(app);
+var io = require("socket.io")(http);
 var PORT = process.env.PORT || 3000;
+
+
+io.on("connection", function (socket) {
+  socket.on("room update", function (newRoom) {
+    // io.emit("room update", newRoom);
+    db.Profile.update({
+      room: newRoom.room
+    }, {
+      where: {
+        id: newRoom.id
+      }
+    }).then(function (data) {
+      db.Profile.findOne({
+        where: {
+          id: newRoom.id
+        }
+      }).then(function(currentUserData) {
+        console.log("Room updated");
+        var currentUser = {
+          username: currentUserData.username,
+            console: currentUserData.console,
+            cod_rank: currentUserData.cod_rank,
+            rl_rank: currentUserData.rl_rank,
+            fortnite_rank: currentUserData.fortnite_rank,
+            room: currentUserData.room,
+            match: currentUserData.match,
+            id: currentUserData.id
+        }
+        io.emit("room update", currentUser);
+      })
+    });
+  });
+
+  socket.on("profile update", function(profileEdits) {
+    db.Profile.findOne({
+      where: {
+        id: profileEdits.id
+      }
+    }).then(function(oldUserData) {
+      // If username is blank, use pre-existing
+      var usernameValue;
+      if (profileEdits.username.length === 0) {
+        usernameValue = oldUserData.username;
+      } else {
+        usernameValue = profileEdits.username;
+      }
+
+      db.Profile.update({
+        username: usernameValue,
+        console: profileEdits.console,
+        rl_rank: profileEdits.rl_rank,
+        fortnite_rank: profileEdits.fortnite_rank,
+        cod_rank: profileEdits.cod_rank,
+        match: "none"
+      },
+      {
+        where: {
+          id: profileEdits.id
+        }
+      }).then(function(uselessData) {
+        db.Profile.findOne({
+          where: {
+            id: profileEdits.id
+          }
+        }).then(function(currentUserData) {
+          console.log("Profile Edited");
+          var currentUser = {
+            username: currentUserData.username,
+              console: currentUserData.console,
+              cod_rank: currentUserData.cod_rank,
+              rl_rank: currentUserData.rl_rank,
+              fortnite_rank: currentUserData.fortnite_rank,
+              room: currentUserData.room,
+              match: currentUserData.match,
+              id: currentUserData.id
+          }
+          io.emit("profile update", currentUser);
+        })
+      })
+    })
+  })
+});
 
 // Middleware
 app.use(express.urlencoded({
@@ -26,13 +108,22 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Middleware for Authentication
-  var options = {
-    host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    port: 3306,
-    user: "duj3hj41l7leydji",
-    password: "osa5lial2f22x1nl",
-    database: "c3reychmec54nnqc"
-  }
+var options = {
+  host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  port: 3306,
+  user: "duj3hj41l7leydji",
+  password: "osa5lial2f22x1nl",
+  database: "c3reychmec54nnqc"
+}
+
+// FOR TESTING USE CODE BELOW (and comment out ^)
+// var options = {
+//   host: "localhost",
+//   port: 3306,
+//   user: "jordanM",
+//   password: "jojo1997",
+//   database: "readyUp_db"
+// }
 
 var sessionStore = new MySQLStore(options);
 app.use(session({
@@ -61,7 +152,7 @@ app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/apiRoutes")(app);
-require("./routes/authRoutes")(app, passport);
+require("./routes/authRoutes")(app, passport, io);
 require("./routes/htmlRoutes")(app);
 
 passport.use(new LocalStrategy(
@@ -104,7 +195,7 @@ if (process.env.NODE_ENV === "test") {
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function () {
-  app.listen(PORT, function () {
+  http.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,

@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 module.exports = function (app, passport) {
 
-  // Dummy page for testing features
+  //  Queue page
   app.get("/queue", authenticationMiddleware(), function (req, res) {
     var userID;
     if (req.user.user_id) {
@@ -28,11 +28,11 @@ module.exports = function (app, passport) {
         var fortnitePlayers = [];
         var codPlayers = [];
         for (var i = 0; i < otherUsersData.length; i++) {
-          if (otherUsersData[i].room === "rocketLeague" && otherUsersData[i].id !== userID) {
+          if (otherUsersData[i].room === "rocketLeague") {
             rlPlayers.push(otherUsersData[i]);
-          } else if (otherUsersData[i].room === "fortnite" && otherUsersData[i].id !== userID) {
+          } else if (otherUsersData[i].room === "fortnite") {
             fortnitePlayers.push(otherUsersData[i]);
-          } else if (otherUsersData[i].room === "cod" && otherUsersData[i].id !== userID) {
+          } else if (otherUsersData[i].room === "cod") {
             codPlayers.push(otherUsersData[i]);
           }
         }
@@ -44,7 +44,8 @@ module.exports = function (app, passport) {
             rl_rank: currentUserData.rl_rank,
             fortnite_rank: currentUserData.fortnite_rank,
             room: currentUserData.room,
-            match: currentUserData.match
+            match: currentUserData.match,
+            id: currentUserData.id
           },
           rlPlayers: rlPlayers,
           fortnitePlayers: fortnitePlayers,
@@ -56,7 +57,7 @@ module.exports = function (app, passport) {
   });
 
   // Match
-  app.post("/rlmatch", function(req, res) {
+  app.post("/rlmatch", function (req, res) {
     var userID;
     if (req.user.user_id) {
       userID = req.user.user_id
@@ -68,27 +69,26 @@ module.exports = function (app, passport) {
       where: {
         room: "rocketLeague"
       }
-    }).then(function(data) {
+    }).then(function (data) {
       db.Profile.findOne({
         where: {
           id: userID
         }
-      }).then(function(currentUserData) {
+      }).then(function (currentUserData) {
         var users = [];
-  
+
         for (var i = 0; i < data.length; i++) {
           if (data[i].id !== userID) {
             users.push(data[i]);
           }
         }
-  
+
         for (var x = 0; x < users.length; x++) {
           if (users[x].rl_rank === currentUserData.rl_rank) {
-  
+
             db.Profile.update({
               match: users[x].username
-            },
-            {
+            }, {
               where: {
                 id: userID
               }
@@ -96,20 +96,19 @@ module.exports = function (app, passport) {
           } else {
             db.Profile.update({
               match: "none"
-            },
-            {
+            }, {
               where: {
                 id: userID
               }
             })
           }
-  
+
         }
       })
     })
   });
 
-  app.post("/codmatch", function(req, res) {
+  app.post("/codmatch", function (req, res) {
     var userID;
     if (req.user.user_id) {
       userID = req.user.user_id
@@ -121,27 +120,26 @@ module.exports = function (app, passport) {
       where: {
         room: "cod"
       }
-    }).then(function(data) {
+    }).then(function (data) {
       db.Profile.findOne({
         where: {
           id: userID
         }
-      }).then(function(currentUserData) {
+      }).then(function (currentUserData) {
         var users = [];
-  
+
         for (var i = 0; i < data.length; i++) {
           if (data[i].id !== userID) {
             users.push(data[i]);
           }
         }
-  
+
         for (var x = 0; x < users.length; x++) {
           if (users[x].cod_rank === currentUserData.cod_rank) {
-  
+
             db.Profile.update({
               match: users[x].username
-            },
-            {
+            }, {
               where: {
                 id: userID
               }
@@ -149,20 +147,19 @@ module.exports = function (app, passport) {
           } else {
             db.Profile.update({
               match: "none"
-            },
-            {
+            }, {
               where: {
                 id: userID
               }
             })
           }
-  
+
         }
       })
     })
   });
 
-  app.post("/fortnitematch", function(req, res) {
+  app.post("/fortnitematch", function (req, res) {
     var userID;
     if (req.user.user_id) {
       userID = req.user.user_id
@@ -174,27 +171,26 @@ module.exports = function (app, passport) {
       where: {
         room: "fortnite"
       }
-    }).then(function(data) {
+    }).then(function (data) {
       db.Profile.findOne({
         where: {
           id: userID
         }
-      }).then(function(currentUserData) {
+      }).then(function (currentUserData) {
         var users = [];
-  
+
         for (var i = 0; i < data.length; i++) {
           if (data[i].id !== userID) {
             users.push(data[i]);
           }
         }
-  
+
         for (var x = 0; x < users.length; x++) {
           if (users[x].fortnite_rank === currentUserData.fortnite_rank) {
-  
+
             db.Profile.update({
               match: users[x].username
-            },
-            {
+            }, {
               where: {
                 id: userID
               }
@@ -202,20 +198,19 @@ module.exports = function (app, passport) {
           } else {
             db.Profile.update({
               match: "none"
-            },
-            {
+            }, {
               where: {
                 id: userID
               }
             })
           }
-  
+
         }
       })
     })
   });
 
-  app.post("/resetMatch", function(req, res) {
+  app.post("/resetMatch", function (req, res) {
     var userID;
     if (req.user.user_id) {
       userID = req.user.user_id
@@ -224,8 +219,7 @@ module.exports = function (app, passport) {
     }
     db.Profile.update({
       match: "none"
-    },
-    {
+    }, {
       where: {
         id: userID
       }

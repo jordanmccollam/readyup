@@ -1,6 +1,11 @@
 var db = require("../models");
 
 module.exports = function (app) {
+  // Chat page for learning socket io
+  app.get("/chat", function(req, res) {
+    res.render("chat");
+  })
+
   // Load index page
   app.get("/", function (req, res) {
     if (req.isAuthenticated()) {

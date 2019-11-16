@@ -45,6 +45,10 @@ body {
   display: inline-block;
 }
 
+#messages {
+  min-height: 250px;
+}
+
 
 #rlSection {
   background: url(../images/rlbg.jpg);
