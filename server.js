@@ -234,22 +234,22 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Middleware for Authentication
-// var options = {
-//   host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-//   port: 3306,
-//   user: "duj3hj41l7leydji",
-//   password: "osa5lial2f22x1nl",
-//   database: "c3reychmec54nnqc"
-// }
+var options = {
+  host: "kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  port: 3306,
+  user: "duj3hj41l7leydji",
+  password: "osa5lial2f22x1nl",
+  database: "c3reychmec54nnqc"
+}
 
 // FOR TESTING USE CODE BELOW (and comment out ^)
-var options = {
-  host: "localhost",
-  port: 3306,
-  user: "jordanM",
-  password: "jojo1997",
-  database: "readyUp_db"
-}
+// var options = {
+//   host: "localhost",
+//   port: 3306,
+//   user: "jordanM",
+//   password: "jojo1997",
+//   database: "readyUp_db"
+// }
 
 var sessionStore = new MySQLStore(options);
 app.use(session({
