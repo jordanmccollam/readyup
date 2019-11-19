@@ -114,30 +114,21 @@ io.on("connection", function (socket) {
         for (var x = 0; x < RlUsers.length; x++) {
           if (RlUsers[x].rl_rank === oldUserData.rl_rank && RlUsers[x].id !== oldUserData.id) {
             bestMatch = RlUsers[x].username;
-            db.Profile.update({
-              match: bestMatch
-            },{
-              where: {id: ownID}
-            }).then(function() {
-              db.Profile.findOne({
-                where: {id: ownID}
-              }).then(function(currentUserData) {
-                io.emit("rl match", currentUserData);
-              })
-            })
           } else {
-            db.Profile.update({
-              match: "none"
-            },{
-              where: {id: ownID}
-            }).then(function() {
-              db.Profile.findOne({
-                where: {id: ownID}
-              }).then(function(currentUserData) {
-                io.emit("rl match", currentUserData);
-              })
-            })
+            bestMatch = "none"
           };
+
+          db.Profile.update({
+            match: bestMatch
+          },{
+            where: {id: ownID}
+          }).then(function() {
+            db.Profile.findOne({
+              where: {id: ownID}
+            }).then(function(currentUserData) {
+              io.emit("rl match", currentUserData);
+            })
+          })
         }
       })
     })
