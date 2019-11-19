@@ -145,31 +145,21 @@ io.on("connection", function (socket) {
         for (var x = 0; x < codUsers.length; x++) {
           if (codUsers[x].cod_rank === oldUserData.cod_rank && codUsers[x].id !== oldUserData.id) {
             bestMatch = codUsers[x].username;
-
-            db.Profile.update({
-              match: bestMatch
-            },{
-              where: {id: ownID}
-            }).then(function() {
-              db.Profile.findOne({
-                where: {id: ownID}
-              }).then(function(currentUserData) {
-                io.emit("cod match", currentUserData);
-              })
-            })
           } else {
-            db.Profile.update({
-              match: "none"
-            },{
-              where: {id: ownID}
-            }).then(function() {
-              db.Profile.findOne({
-                where: {id: ownID}
-              }).then(function(currentUserData) {
-                io.emit("cod match", currentUserData);
-              })
-            })
+            bestMatch = "none"
           }
+
+          db.Profile.update({
+            match: bestMatch
+          },{
+            where: {id: ownID}
+          }).then(function() {
+            db.Profile.findOne({
+              where: {id: ownID}
+            }).then(function(currentUserData) {
+              io.emit("cod match", currentUserData);
+            })
+          })
         }
       })
     })
@@ -186,31 +176,21 @@ io.on("connection", function (socket) {
         for (var x = 0; x < fortniteUsers.length; x++) {
           if (fortniteUsers[x].fortnite_rank === oldUserData.fortnite_rank && fortniteUsers[x].id !== oldUserData.id) {
             bestMatch = fortniteUsers[x].username;
-
-            db.Profile.update({
-              match: bestMatch
-            },{
-              where: {id: ownID}
-            }).then(function() {
-              db.Profile.findOne({
-                where: {id: ownID}
-              }).then(function(currentUserData) {
-                io.emit("fortnite match", currentUserData);
-              })
-            })
           } else {
-            db.Profile.update({
-              match: "none"
-            },{
-              where: {id: ownID}
-            }).then(function() {
-              db.Profile.findOne({
-                where: {id: ownID}
-              }).then(function(currentUserData) {
-                io.emit("fortnite match", currentUserData);
-              })
-            })
+            bestMatch = "none"
           }
+
+          db.Profile.update({
+            match: bestMatch
+          },{
+            where: {id: ownID}
+          }).then(function() {
+            db.Profile.findOne({
+              where: {id: ownID}
+            }).then(function(currentUserData) {
+              io.emit("fortnite match", currentUserData);
+            })
+          })
         }
       })
     })
