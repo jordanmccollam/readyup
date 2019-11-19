@@ -35,29 +35,29 @@ io.on("connection", function (socket) {
         where: {
           id: newRoom.id
         }
-      }).then(function(currentUserData) {
+      }).then(function (currentUserData) {
         console.log("Room updated");
         var currentUser = {
           username: currentUserData.username,
-            console: currentUserData.console,
-            cod_rank: currentUserData.cod_rank,
-            rl_rank: currentUserData.rl_rank,
-            fortnite_rank: currentUserData.fortnite_rank,
-            room: currentUserData.room,
-            match: currentUserData.match,
-            id: currentUserData.id
+          console: currentUserData.console,
+          cod_rank: currentUserData.cod_rank,
+          rl_rank: currentUserData.rl_rank,
+          fortnite_rank: currentUserData.fortnite_rank,
+          room: currentUserData.room,
+          match: currentUserData.match,
+          id: currentUserData.id
         }
         io.emit("room update", currentUser);
       })
     });
   });
 
-  socket.on("profile update", function(profileEdits) {
+  socket.on("profile update", function (profileEdits) {
     db.Profile.findOne({
       where: {
         id: profileEdits.id
       }
-    }).then(function(oldUserData) {
+    }).then(function (oldUserData) {
       // If username is blank, use pre-existing
       var usernameValue;
       if (profileEdits.username.length === 0) {
@@ -73,27 +73,26 @@ io.on("connection", function (socket) {
         fortnite_rank: profileEdits.fortnite_rank,
         cod_rank: profileEdits.cod_rank,
         match: "none"
-      },
-      {
+      }, {
         where: {
           id: profileEdits.id
         }
-      }).then(function(uselessData) {
+      }).then(function (uselessData) {
         db.Profile.findOne({
           where: {
             id: profileEdits.id
           }
-        }).then(function(currentUserData) {
+        }).then(function (currentUserData) {
           console.log("Profile Edited");
           var currentUser = {
             username: currentUserData.username,
-              console: currentUserData.console,
-              cod_rank: currentUserData.cod_rank,
-              rl_rank: currentUserData.rl_rank,
-              fortnite_rank: currentUserData.fortnite_rank,
-              room: currentUserData.room,
-              match: currentUserData.match,
-              id: currentUserData.id
+            console: currentUserData.console,
+            cod_rank: currentUserData.cod_rank,
+            rl_rank: currentUserData.rl_rank,
+            fortnite_rank: currentUserData.fortnite_rank,
+            room: currentUserData.room,
+            match: currentUserData.match,
+            id: currentUserData.id
           }
           io.emit("profile update", currentUser);
         })
@@ -102,30 +101,41 @@ io.on("connection", function (socket) {
   });
 
   // Matching
-  socket.on("rl match", function(ownID) {
+  socket.on("rl match", function (ownID) {
     db.Profile.findOne({
-      where: {id: ownID}
-    }).then(function(oldUserData) {
+      where: {
+        id: ownID
+      }
+    }).then(function (oldUserData) {
       db.Profile.findAll({
-        where: {room: "rocketLeague"}
-      }).then(function(RlUsers) {
-        var bestMatch;
-        var bestMatchID;
+        where: {
+          room: "rocketLeague"
+        }
+      }).then(function (RlUsers) {
+        var bestMatch = {
+          name: "none",
+          rankDifference: 1000
+        };
+        var totalDifference;
         for (var x = 0; x < RlUsers.length; x++) {
-          if (RlUsers[x].rl_rank === oldUserData.rl_rank && RlUsers[x].id !== oldUserData.id) {
-            bestMatch = RlUsers[x].username;
-          } else {
-            bestMatch = "none"
-          };
+          totalDifference = Math.abs(parseInt(RlUsers[x].rl_rank) - parseInt(oldUserData.rl_rank));
+          if (totalDifference <= bestMatch.rankDifference && RlUsers[x].id !== oldUserData.id) {
+            bestMatch.name = RlUsers[x].username;
+            bestMatch.rankDifference = parseInt(RlUsers[x].rl_rank);
+          }
 
           db.Profile.update({
-            match: bestMatch
-          },{
-            where: {id: ownID}
-          }).then(function() {
+            match: bestMatch.name
+          }, {
+            where: {
+              id: ownID
+            }
+          }).then(function () {
             db.Profile.findOne({
-              where: {id: ownID}
-            }).then(function(currentUserData) {
+              where: {
+                id: ownID
+              }
+            }).then(function (currentUserData) {
               io.emit("rl match", currentUserData);
             })
           })
@@ -133,30 +143,42 @@ io.on("connection", function (socket) {
       })
     })
   });
-  socket.on("cod match", function(ownID) {
-    db.Profile.findOne({
-      where: {id: ownID}
-    }).then(function(oldUserData) {
-      db.Profile.findAll({
-        where: {room: "cod"}
-      }).then(function(codUsers) {
-        var bestMatch;
 
+  socket.on("cod match", function (ownID) {
+    db.Profile.findOne({
+      where: {
+        id: ownID
+      }
+    }).then(function (oldUserData) {
+      db.Profile.findAll({
+        where: {
+          room: "cod"
+        }
+      }).then(function (codUsers) {
+        var bestMatch = {
+          name: "none",
+          rankDifference: 1000
+        };
+        var totalDifference;
         for (var x = 0; x < codUsers.length; x++) {
-          if (codUsers[x].cod_rank === oldUserData.cod_rank && codUsers[x].id !== oldUserData.id) {
-            bestMatch = codUsers[x].username;
-          } else {
-            bestMatch = "none"
+          totalDifference = Math.abs(parseInt(codUsers[x].cod_rank) - parseInt(oldUserData.cod_rank));
+          if (totalDifference <= bestMatch.rankDifference && codUsers[x].id !== oldUserData.id) {
+            bestMatch.name = codUsers[x].username;
+            bestMatch.rankDifference = parseInt(codUsers[x].cod_rank);
           }
 
           db.Profile.update({
-            match: bestMatch
-          },{
-            where: {id: ownID}
-          }).then(function() {
+            match: bestMatch.name
+          }, {
+            where: {
+              id: ownID
+            }
+          }).then(function () {
             db.Profile.findOne({
-              where: {id: ownID}
-            }).then(function(currentUserData) {
+              where: {
+                id: ownID
+              }
+            }).then(function (currentUserData) {
               io.emit("cod match", currentUserData);
             })
           })
@@ -164,30 +186,42 @@ io.on("connection", function (socket) {
       })
     })
   });
-  socket.on("fortnite match", function(ownID) {
-    db.Profile.findOne({
-      where: {id: ownID}
-    }).then(function(oldUserData) {
-      db.Profile.findAll({
-        where: {room: "fortnite"}
-      }).then(function(fortniteUsers) {
-        var bestMatch;
 
+  socket.on("fortnite match", function (ownID) {
+    db.Profile.findOne({
+      where: {
+        id: ownID
+      }
+    }).then(function (oldUserData) {
+      db.Profile.findAll({
+        where: {
+          room: "fortnite"
+        }
+      }).then(function (fortniteUsers) {
+        var bestMatch = {
+          name: "none",
+          rankDifference: 1000
+        };
+        var totalDifference;
         for (var x = 0; x < fortniteUsers.length; x++) {
-          if (fortniteUsers[x].fortnite_rank === oldUserData.fortnite_rank && fortniteUsers[x].id !== oldUserData.id) {
-            bestMatch = fortniteUsers[x].username;
-          } else {
-            bestMatch = "none"
+          totalDifference = Math.abs(parseInt(fortniteUsers[x].fortnite_rank) - parseInt(oldUserData.fortnite_rank));
+          if (totalDifference <= bestMatch.rankDifference && fortniteUsers[x].id !== oldUserData.id) {
+            bestMatch.name = fortniteUsers[x].username;
+            bestMatch.rankDifference = parseInt(fortniteUsers[x].fortnite_rank);
           }
 
           db.Profile.update({
-            match: bestMatch
-          },{
-            where: {id: ownID}
-          }).then(function() {
+            match: bestMatch.name
+          }, {
+            where: {
+              id: ownID
+            }
+          }).then(function () {
             db.Profile.findOne({
-              where: {id: ownID}
-            }).then(function(currentUserData) {
+              where: {
+                id: ownID
+              }
+            }).then(function (currentUserData) {
               io.emit("fortnite match", currentUserData);
             })
           })

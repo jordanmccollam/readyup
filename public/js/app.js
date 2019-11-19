@@ -13,7 +13,7 @@ $(document).ready(function () {
     // SOCKET LISTENERS *********************************************
     socket.on("room update", function(currentUser) {
         var rank;
-        var modal = $('<div class="modal" tabindex="-1" role="dialog" id="matchModal-' + currentUser.id + '"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Match!</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body text-center"><p><span id="matchNotification" class="text-success customFont"></span> is your skill level.</p><p>Find each other in game and party up!</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>')
+        var modal = $('<div class="modal" tabindex="-1" role="dialog" id="matchModal-' + currentUser.id + '"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Match!</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body text-center"><p><span id="matchNotification" class="text-success customFont"></span> is closest to your skill level.</p><p>Find each other in game and party up!</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>')
         $("#" + currentUser.id).remove();
         $("#matchModal-" + currentUser.id).remove();
         if (currentUser.room === "rocketLeague") {
@@ -231,40 +231,40 @@ $(document).ready(function () {
     
     function changeIcon() {
         // ROCKET LEAGUE RANK ICONS
-        $(".bronze1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlBronze1.png' width='35'>");
-        $(".bronze2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlBronze2.png' width='35'>");
-        $(".bronze3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlBronze3.png' width='35'>");
-        $(".silver1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlSilver1.png' width='35'>");
-        $(".silver2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlSilver2.png' width='35'>");
-        $(".silver3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlSilver3.png' width='35'>");
-        $(".gold1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGold1.png' width='35'>");
-        $(".gold2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGold2.png' width='35'>");
-        $(".gold3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGold3.png' width='35'>");
-        $(".plat1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlPlat1.png' width='35'>");
-        $(".plat2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlPlat2.png' width='35'>");
-        $(".plat3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlPlat3.png' width='35'>");
-        $(".d1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlD1.png' width='35'>");
-        $(".d2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlD2.png' width='35'>");
-        $(".d3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlD3.png' width='35'>");
-        $(".champ1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlChamp1.png' width='35'>");
-        $(".champ2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlChamp2.png' width='35'>");
-        $(".champ3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlChamp3.png' width='35'>");
-        $(".grand").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGrand.png' width='35'>");
+        $(".1").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlBronze1.png' width='35'>");
+        $(".2").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlBronze2.png' width='35'>");
+        $(".3").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlBronze3.png' width='35'>");
+        $(".4").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlSilver1.png' width='35'>");
+        $(".4").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlSilver2.png' width='35'>");
+        $(".6").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlSilver3.png' width='35'>");
+        $(".7").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGold1.png' width='35'>");
+        $(".8").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGold2.png' width='35'>");
+        $(".9").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGold3.png' width='35'>");
+        $(".10").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlPlat1.png' width='35'>");
+        $(".11").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlPlat2.png' width='35'>");
+        $(".12").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlPlat3.png' width='35'>");
+        $(".13").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlD1.png' width='35'>");
+        $(".14").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlD2.png' width='35'>");
+        $(".15").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlD3.png' width='35'>");
+        $(".16").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlChamp1.png' width='35'>");
+        $(".17").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlChamp2.png' width='35'>");
+        $(".18").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlChamp3.png' width='35'>");
+        $(".19").find(".iconDisplay, .rlIcon").html("<img src='images/rocketLeagueIcons/rlGrand.png' width='35'>");
 
         // FORTNITE RANK ICONS
-        $(".open1").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/open1.png' class='rounded' width='25'>");
-        $(".open2").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/open2.png' class='rounded' width='25'>");
-        $(".open3").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/open3.png' class='rounded' width='25'>");
-        $(".contender1").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/contender1.png' class='rounded' width='25'>");
-        $(".contender2").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/contender2.png' class='rounded' width='25'>");
-        $(".contender3").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/contender3.png' class='rounded' width='25'>");
-        $(".champ").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/champ.png' class='rounded' width='25'>");
+        $(".24").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/open1.png' class='rounded' width='25'>");
+        $(".25").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/open2.png' class='rounded' width='25'>");
+        $(".26").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/open3.png' class='rounded' width='25'>");
+        $(".27").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/contender1.png' class='rounded' width='25'>");
+        $(".28").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/contender2.png' class='rounded' width='25'>");
+        $(".29").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/contender3.png' class='rounded' width='25'>");
+        $(".30").find(".iconDisplay, .fortniteIcon").html("<img src='images/fortniteIcons/champ.png' class='rounded' width='25'>");
 
         // COD RANKS
-        $(".novice").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-primary'></div>");
-        $(".recruit").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-success'></div>");
-        $(".hardened").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-warning'></div>");
-        $(".veteran").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-danger'></div>");
+        $(".20").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-primary'></div>");
+        $(".21").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-success'></div>");
+        $(".22").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-warning'></div>");
+        $(".23").find(".iconDisplay, .codIcon").html("<div class='rounded-circle codIcon bg-danger'></div>");
 
         // CONSOLE ICONS
         // If player is on ps4, display ps4 font-awesome icon
