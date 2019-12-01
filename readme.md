@@ -49,3 +49,4 @@ Add a way to auto link users discorc usernames into their profile to enhance the
 - Bootstrap + CSS
 - JavaScript + jQuery
 - Sequelize
+- Node.js
