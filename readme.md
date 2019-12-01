@@ -1,5 +1,9 @@
 # Ready Up
 
+*https://gamersreadyup.herokuapp.com/*
+
+---
+
 ![Homepage](public/images/screenshots/homepage.PNG)
 
 ## Description
@@ -23,7 +27,7 @@ Jordan McCollam - Created the majority of the backend logic using JavaScript for
 
 Jacob Hines - Created the background and logo, created the Queue page, image guru and styling, helped on presentation, demo video.
 
-Ewin Tucker - Helped with css sytling 
+Ewin Tucker - Helped with css syling 
 
 ### Challenges
 Getting matchmaking prompts to work when multiple players are in the same queue.
