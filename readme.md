@@ -39,7 +39,7 @@ Add a way to auto link users discorc usernames into their profile to enhance the
 
 ---
 
-## Technolgies
+## Technologies
 - MySQL
 - Express.js
 - Passport.js
