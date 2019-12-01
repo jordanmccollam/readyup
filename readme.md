@@ -37,5 +37,15 @@ We will look to incorporate a lot more games into the queue spanning across all 
 Adding in real time invites.
 Add a way to auto link users discorc usernames into their profile to enhance the discord chat feature.
 
-## Demo
-![Demo](public/videos/demo.mp4)
+---
+
+## Technolgies
+- MySQL
+- Express.js
+- Passport.js
+- BCrypt
+- Socket.io
+- Handlebars
+- Bootstrap + CSS
+- JavaScript + jQuery
+- Sequelize
