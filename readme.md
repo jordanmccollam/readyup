@@ -1,5 +1,4 @@
-# Project Name
-Ready Up!
+# Ready Up
 
 ![Homepage](public/images/screenshots/homepage.PNG)
 
